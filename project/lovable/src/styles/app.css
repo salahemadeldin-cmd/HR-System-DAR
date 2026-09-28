@@ -7,3 +7,8 @@ a.navitem { text-decoration: none; }
 /* ألوان Tailwind القديمة (text-navy) فى الوضع الداكن — تتبع لون الإبراز المقروء */
 .app[data-theme="dark"] .text-navy { color: var(--accent-fg); }
 .app[data-theme="dark"] .text-ink { color: var(--ink); }
+/* نموذج الإضافة ونافذة العامل على الشاشات الضيقة */
+@media (max-width: 900px) {
+  .form-grid { grid-template-columns: 1fr !important; }
+  .wd-top { grid-template-columns: 1fr !important; }
+}

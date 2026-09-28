@@ -29,3 +29,14 @@ export function ageFromNationalId(v?: string | null): number | null {
   const diff = Date.now() - new Date(b).getTime();
   return Math.floor(diff / (365.25 * 24 * 3600 * 1000));
 }
+
+// كود محافظة الميلاد = الرقمان 8 و9 من الرقم القومى
+const GOV_CODES: Record<string, string> = { '01': 'القاهرة', '02': 'الإسكندرية', '03': 'بورسعيد', '04': 'السويس', '11': 'دمياط', '12': 'الدقهلية', '13': 'الشرقية', '14': 'القليوبية', '15': 'كفر الشيخ', '16': 'الغربية', '17': 'المنوفية', '18': 'البحيرة', '19': 'الإسماعيلية', '21': 'الجيزة', '22': 'بني سويف', '23': 'الفيوم', '24': 'المنيا', '25': 'أسيوط', '26': 'سوهاج', '27': 'قنا', '28': 'أسوان', '29': 'الأقصر', '31': 'البحر الأحمر', '32': 'الوادي الجديد', '33': 'مطروح', '34': 'شمال سيناء', '35': 'جنوب سيناء', '88': 'خارج الجمهورية' };
+
+export function placeFromNationalId(v?: string | null): string | null {
+  const s = String(v ?? '').replace(/\D/g, '');
+  return s.length === 14 ? GOV_CODES[s.slice(7, 9)] || null : null;
+}
+
+/** yyyy-mm-dd → dd/mm/yyyy للعرض */
+export const dmy = (iso?: string | null) => (iso && /^\d{4}-\d{2}-\d{2}/.test(iso) ? iso.slice(0, 10).split('-').reverse().join('/') : iso || '');

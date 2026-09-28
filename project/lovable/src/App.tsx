@@ -17,11 +17,13 @@ import Transfers from './pages/Transfers';
 import Settlements from './pages/Settlements';
 import Reports from './pages/Reports';
 import Users from './pages/Users';
+import Barcodes from './pages/Barcodes';
 
 // الشاشات المنفَّذة حتى الآن؛ الباقى يعرض <Pending/> إلى أن يُبنى فى مرحلته.
 const BUILT: Record<string, React.ReactNode> = {
   dashboard: <Dashboard />,
   workers: <Workers />,
+  barcodes: <Barcodes />,
   professions: <Professions />,
   allowances: <><Allowances /><Projects /></>,
   transfers: <Transfers />,

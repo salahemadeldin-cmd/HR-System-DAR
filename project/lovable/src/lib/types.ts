@@ -16,6 +16,15 @@ export interface Worker {
   projectCode: string | null; contractorCode: string | null; source: Source; category: Grade | null;
   manager: string | null; startDate: string | null; allowance: number;
   housingAllowance: number; transportAllowance: number; active: boolean; fingerprintId?: string | null;
+  // حقول أُضيفت مع تصميم EADRS (اختيارية — السجلات القديمة لا تحملها)
+  rate?: number | null;          // قيمة الدرجة اليومية إن اختلفت عن جدول الوظيفة
+  hours?: number | null;         // ساعات العمل اليومية (افتراضى 8)
+  leaveDate?: string | null;     // تاريخ المغادرة عند التحويل إلى غير نشط
+  regDate?: string | null;       // تاريخ أمر الشغل
+  endDate?: string | null;       // نهاية أمر الشغل
+  birthDate?: string | null; birthPlace?: string | null;  // تُشتق من الرقم القومى إن لم تُسجَّل
+  cardImage?: string | null;     // صورة البطاقة (data URL)
+  workOrderFile?: string | null; // اسم ملف أمر الشغل
 }
 export interface Transfer {
   id: string; workerCode: string; oldCode: string; newCode: string;
