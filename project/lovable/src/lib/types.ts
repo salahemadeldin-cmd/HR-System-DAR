@@ -10,6 +10,10 @@ export interface Profession { name: string; grade: Grade; dailyValue: number; de
 export interface Contractor {
   code: string; name: string; projectCode: string | null; nationalId: string | null;
   active: boolean; housingAllowance: number; transportAllowance: number; documents: string[];
+  // حقول تصميم EADRS (اختيارية)
+  type?: 'عمالة ذاتى' | 'عمالة باطن';
+  regDate?: string | null; account?: string | null; sapId?: string | null; tax14?: boolean; notes?: string | null;
+  docs?: { card?: string | null; cr?: string | null; boqs?: string[] };
 }
 export interface Worker {
   code: string; name: string; nationalId: string | null; profession: string; department: string;
