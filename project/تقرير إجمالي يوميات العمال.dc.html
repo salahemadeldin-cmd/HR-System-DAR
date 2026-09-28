@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="omelette-owns-print" content="true">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; font-family: Cairo, system-ui, sans-serif; background: #EFEFF2; }
+  a { color: #2B3080; }
+  a:hover { color: #22276B; }
+  @page { size: A4 portrait; margin: 10mm; }
+  @media print {
+    body { background: #fff; }
+    .no-print { display: none !important; }
+    .a4-sheet { width: auto !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; }
+    .print-footer { position: fixed; bottom: 0; left: 0; right: 0; }
+  }
+</style>
+</helmet>
+<div dir="rtl" style="font-family: Cairo, system-ui, sans-serif">
+  <div class="no-print" style="display:flex; gap:10px; align-items:center; padding:14px 18px; background:#fff; border-bottom:1px solid #D5D9EF; position:sticky; top:0; z-index:5; flex-wrap:wrap">
+    <label style="display:flex; gap:6px; align-items:center; font-size:13px; color:#3A3A3C">من
+      <input type="date" value="{{ from }}" onChange="{{ setFrom }}" style="font-family:inherit; font-size:13px; padding:6px 8px; border:1px solid #D5D9EF; border-radius:6px; color:#22276B">
+    </label>
+    <label style="display:flex; gap:6px; align-items:center; font-size:13px; color:#3A3A3C">إلى
+      <input type="date" value="{{ to }}" onChange="{{ setTo }}" style="font-family:inherit; font-size:13px; padding:6px 8px; border:1px solid #D5D9EF; border-radius:6px; color:#22276B">
+    </label>
+    <div style="margin-right:auto; display:flex; gap:10px">
+      <button onClick="{{ doPrint }}" style="font-family:inherit; font-weight:700; font-size:13px; padding:9px 18px; border:0; border-radius:6px; background:#2B3080; color:#fff; cursor:pointer">طباعة</button>
+      <button onClick="{{ doPrint }}" style="font-family:inherit; font-weight:700; font-size:13px; padding:9px 18px; border:1px solid #2B3080; border-radius:6px; background:#fff; color:#2B3080; cursor:pointer">تصدير PDF</button>
+    </div>
+  </div>
+
+  <div class="a4-sheet" style="width:190mm; margin:16px auto; padding:10mm; background:#fff; box-shadow:0 2px 14px rgba(0,0,0,.14); box-sizing:content-box">
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding-bottom:6px; border-bottom:2px solid #2B3080">
+      <div style="line-height:1.5">
+        <div style="font-size:12.5pt; font-weight:900; color:#2B3080">شركة الشروق للمقاولات العمومية والتوريدات للقطاع العام</div>
+        <div style="font-size:8.5pt; color:#3A3A3C">مقاولات عمومية · توريدات · أعمال إنشائية وتشغيل</div>
+      </div>
+      <img src="brand-logo.png" alt="شعار الشركة" style="height:46px; width:auto; object-fit:contain">
+    </div>
+
+    <div style="text-align:center; margin:5mm 0 4mm">
+      <div style="display:inline-block; background:#2B3080; color:#fff; font-size:15pt; font-weight:900; padding:7px 34px; border-radius:3px">تقرير عن إجمالي يوميات العمل للعمال</div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-start; margin-bottom:3mm">
+      <table style="border-collapse:collapse; font-size:9.5pt">
+        <tbody>
+          <tr>
+            <td style="border:1px solid #2B3080; background:#ECEEF8; font-weight:700; color:#22276B; padding:4px 12px">عن الفترة</td>
+            <td style="border:1px solid #2B3080; padding:4px 10px; color:#3A3A3C">من</td>
+            <td style="border:1px solid #2B3080; padding:4px 14px; font-weight:700">{{ fromLabel }}</td>
+            <td style="border:1px solid #2B3080; padding:4px 10px; color:#3A3A3C">إلى</td>
+            <td style="border:1px solid #2B3080; padding:4px 14px; font-weight:700">{{ toLabel }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <table style="width:100%; border-collapse:collapse; font-size:10pt; margin-bottom:4mm">
+      <tbody>
+        <tr>
+          <td style="border:1px solid #9AA2C9; background:#ECEEF8; font-weight:700; color:#22276B; padding:5px 10px; width:24mm">اسم المشروع</td>
+          <td style="border:1px solid #9AA2C9; padding:5px 10px; font-weight:600">{{ projectName }}</td>
+          <td style="border:1px solid #9AA2C9; background:#E8F1EA; font-weight:700; color:#2E4B37; padding:5px 10px; width:22mm">اسم المقاول</td>
+          <td style="border:1px solid #9AA2C9; padding:5px 10px; font-weight:600">{{ contractorName }}</td>
+          <td style="border:1px solid #9AA2C9; background:#F4EEE2; font-weight:700; color:#5A4A2C; padding:5px 10px; width:18mm">المنطقة</td>
+          <td style="border:1px solid #9AA2C9; padding:5px 10px; font-weight:600">{{ areaName }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:grid; grid-template-columns:22mm 1fr 30mm 18mm 30mm 32mm; background:#2B3080; color:#fff; font-size:9.5pt; font-weight:700; text-align:center; border:1px solid #2B3080">
+      <div style="padding:5px 4px; border-left:1px solid rgba(255,255,255,.35)">كود العامل</div>
+      <div style="padding:5px 4px; border-left:1px solid rgba(255,255,255,.35)">اسم العامل</div>
+      <div style="padding:5px 4px; border-left:1px solid rgba(255,255,255,.35)">المهنة</div>
+      <div style="padding:5px 4px; border-left:1px solid rgba(255,255,255,.35)">عدد اليوميات</div>
+      <div style="padding:5px 4px; border-left:1px solid rgba(255,255,255,.35)">القيمة المستحقة</div>
+      <div style="padding:5px 4px">التوقيع / البصمة</div>
+    </div>
+
+    <sc-for list="{{ rows }}" as="w" hint-placeholder-count="9">
+      <div style="display:grid; grid-template-columns:22mm 1fr 30mm 18mm 30mm 32mm; font-size:10pt; border:1px solid #9AA2C9; border-top:0; break-inside:avoid; page-break-inside:avoid; background:{{ w.bg }}">
+        <div style="padding:6px 4px; text-align:center; border-left:1px solid #C9CEE6; font-variant-numeric:tabular-nums; color:#22276B; font-weight:600">{{ w.code }}</div>
+        <div style="padding:6px 10px; border-left:1px solid #C9CEE6; color:#201E1D">{{ w.name }}</div>
+        <div style="padding:6px 6px; border-left:1px solid #C9CEE6; color:#3A3A3C; font-size:9.5pt">{{ w.profession }}</div>
+        <div style="padding:6px 4px; text-align:center; border-left:1px solid #C9CEE6; font-weight:700; font-variant-numeric:tabular-nums">{{ w.days }}</div>
+        <div style="padding:6px 8px; text-align:center; border-left:1px solid #C9CEE6; font-weight:700; font-variant-numeric:tabular-nums; color:#22276B">{{ w.amount }}</div>
+        <div style="padding:6px 4px; min-height:11mm"></div>
+      </div>
+    </sc-for>
+
+    <div style="break-inside:avoid; page-break-inside:avoid; margin-top:4mm">
+      <div style="display:grid; grid-template-columns:1fr auto; align-items:center; border:2px solid #2B3080; background:#ECEEF8">
+        <div style="padding:8px 14px; font-size:11pt; font-weight:900; color:#22276B">إجمالي المستحق للمقاول عن الفترة</div>
+        <div style="padding:8px 20px; font-size:13pt; font-weight:900; color:#2B3080; background:#D5D9EF; font-variant-numeric:tabular-nums">{{ grandTotal }}</div>
+      </div>
+      <div style="margin-top:3mm; font-size:8.5pt; color:#3A3A3C">عدد العمال: {{ workerCount }} · إجمالي اليوميات: {{ totalDays }}</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6mm; margin-top:8mm; font-size:9.5pt; color:#3A3A3C; text-align:center">
+        <div><div style="height:14mm; border-bottom:1px solid #3A3A3C"></div><div style="padding-top:3px">HR Site</div></div>
+        <div><div style="height:14mm; border-bottom:1px solid #3A3A3C"></div><div style="padding-top:3px">محاسب الموقع</div></div>
+        <div><div style="height:14mm; border-bottom:1px solid #3A3A3C"></div><div style="padding-top:3px">مدير المشروع</div></div>
+      </div>
+    </div>
+
+    <div class="print-footer" style="display:flex; justify-content:space-between; align-items:center; font-size:8pt; color:#3A3A3C; border-top:1px solid #D5D9EF; padding-top:4px; margin-top:8mm">
+      <span>تاريخ ووقت الطباعة: {{ printedAt }}</span>
+      <span style="font-variant-numeric:tabular-nums">Page 1 of {{ pageCount }}</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;projectName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;مشروع إنشاء المقر الإداري الجديد&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;contractorName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ذاتي الإدارة&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;areaName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;الشئون الإدارية&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const DATA = [
+  ['13610034','إبراهيم جلال محمد نوغان','نجار مسلح',16,6296.25],
+  ['13610041','أحمد سيد عبد الرحمن حسين','حداد تسليح',14,5509.22],
+  ['13610058','السيد محمود عطية الشافعي','بناء مباني',16,6296.25],
+  ['13610063','جمال عبد الناصر فتحي سالم','مبيض محارة',12,4722.19],
+  ['13610077','حسن علي عبد الفتاح مرسي','سباك',15,5902.73],
+  ['13610084','خالد إبراهيم توفيق زيدان','كهربائي',10,3935.16],
+  ['13610090','رمضان سعيد أحمد الدسوقي','عامل عادي',16,6296.25],
+  ['13610105','سامي عبد الحميد رجب غانم','مساعد نجار',11,4328.67],
+  ['13610112','طارق مصطفى كامل عبد الله','مشرف عمال',13,5115.71]
+];
+
+class Component extends DCLogic {
+  state = { from: '2026-09-01', to: '2026-09-15' };
+
+  fmtDate(v) {
+    if (!v) return '—';
+    const d = new Date(v + 'T00:00:00');
+    return d.toLocaleDateString('ar-EG', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
+  fmtMoney(n) {
+    return n.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ج.م';
+  }
+
+  renderVals() {
+    const rows = DATA.map(([code, name, profession, days, amount], i) => ({
+      code, name, profession, days,
+      amount: this.fmtMoney(amount),
+      bg: i % 2 ? '#F7F8FC' : '#FFFFFF'
+    }));
+    const now = new Date();
+    return {
+      rows,
+      from: this.state.from,
+      to: this.state.to,
+      fromLabel: this.fmtDate(this.state.from),
+      toLabel: this.fmtDate(this.state.to),
+      projectName: this.props.projectName ?? 'مشروع إنشاء المقر الإداري الجديد',
+      contractorName: this.props.contractorName ?? 'ذاتي الإدارة',
+      areaName: this.props.areaName ?? 'الشئون الإدارية',
+      workerCount: DATA.length,
+      totalDays: DATA.reduce((s, r) => s + r[3], 0),
+      grandTotal: this.fmtMoney(DATA.reduce((s, r) => s + r[4], 0)),
+      pageCount: Math.max(1, Math.ceil(DATA.length / 18)),
+      printedAt: now.toLocaleDateString('ar-EG', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' }) + ' — ' + now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }),
+      setFrom: e => this.setState({ from: e.target.value }),
+      setTo: e => this.setState({ to: e.target.value }),
+      doPrint: () => window.print()
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="_ds/broadsheet-60b6b6f7-4da6-4861-a698-cdc2e96f33e5/styles.css">
+  <script src="./doc-page.js"></script>
+  <style>
+    doc-page:not(:defined){visibility:hidden}
+    .eadrs-doc{--color-accent:#2B3080;--color-accent-700:#22276B;--color-accent-100:#ECEEF8;--color-accent-200:#D5D9EF;--color-accent-2-700:#8A2B2B;--color-text:#3A3A3C}
+    .eadrs-doc h1,.eadrs-doc h2,.eadrs-doc h3{font-family:var(--font-heading);color:var(--color-text);text-wrap:balance}
+    .eadrs-doc h2{color:var(--color-accent-700)}
+    .eadrs-doc p,.eadrs-doc li,.eadrs-doc td,.eadrs-doc th{font-family:var(--font-body)}
+    .eadrs-doc table.spec{width:100%;border-collapse:collapse;margin:var(--space-4) 0;font-size:14px}
+    .eadrs-doc table.spec th{text-align:right;border-bottom:2px solid var(--color-accent);padding:6px 10px;color:var(--color-accent-700)}
+    .eadrs-doc table.spec td{border-bottom:1px solid var(--color-neutral-300);padding:6px 10px;vertical-align:top}
+    .eadrs-doc .kicker{font-family:var(--font-heading);letter-spacing:.08em;color:var(--color-accent-700);font-size:13px;text-transform:uppercase}
+    .eadrs-doc .phase{margin:var(--space-6) 0}
+    .eadrs-doc .phase h3{margin-bottom:2px}
+  </style>
+</helmet>
+
+<doc-page margin="0.9in" style="font-family:var(--font-body)">
+  <div class="eadrs-doc" dir="rtl" lang="ar" style="text-align:right">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);border-bottom:3px solid var(--color-accent);padding-bottom:var(--space-3);margin-bottom:var(--space-5)">
+      <img src="brand-logo.png" alt="الشروق للمقاولات العمومية والتوريدات" style="width:150px;display:block"/>
+      <div style="font-family:var(--font-heading);font-size:13px;color:var(--color-accent-700);text-align:left">الشروق للمقاولات العمومية والتوريدات<br/>للقطاع العام</div>
+    </div>
+
+    <div style="margin-bottom:var(--space-6)">
+      <div class="kicker">مقترح معماري سحابي</div>
+      <h1 style="font-size:34px;margin:6px 0 4px">نظام تسجيل حضور وانصراف العمال السحابي (Cloud EADRS)</h1>
+      <p style="font-size:15px;color:var(--color-neutral-700);margin:0">من قاعدة بيانات محلية (Microsoft Access) إلى منصة سحابية متكاملة لقطاع المقاولات</p>
+      <p style="font-size:13px;color:var(--color-neutral-600);margin-top:8px">إعداد: مهندس حلول سحابية وخبير أنظمة موارد بشرية &nbsp;·&nbsp; أغسطس 2026</p>
+    </div>
+
+    <h2 style="font-size:22px">1. تقييم الوضع الحالي</h2>
+    <p>يعتمد النظام الحالي على تطبيق Microsoft Access يعمل من قاعدة بيانات محلية على شبكة داخلية، ويضم شاشات لتسجيل بيانات المقاولين والعمال والمهن وتعريف الورديات وسجلات الحركة اليومية ("السراكي") وسجل الحضور والانصراف. النظام يخدم الغرض التشغيلي الأساسي، لكنه محدود بطبيعته: مستخدم واحد أو قلة من المستخدمين في وقت واحد، لا وصول عن بُعد من المواقع، لا نسخ احتياطي تلقائي، ولا واجهة لقارئ باركود حي، وتحليل البيانات يتم يدويًا خارج النظام.</p>
+    <p>الجداول القائمة (عمال، مقاولي باطن، مهن بفئات A/B/C وفئات ساعات إضافية وخصم، تعريف أوقات الورديات، سجل السراكي اليومي، وسجل الدخول/الخروج بالوقت الفعلي) تمثل نموذج بيانات ناضجًا بالفعل، وهو الأساس الذي يُبنى عليه التصميم السحابي أدناه — الهدف نقل المنطق لا إعادة اختراعه.</p>
+
+    <h2 style="font-size:22px">2. الأهداف المعمارية</h2>
+    <ul>
+      <li>وصول متعدد المستخدمين من المواقع والمكاتب عبر متصفح/تطبيق موبايل، بلا تعارض قفل ملفات.</li>
+      <li>تسجيل الحركة لحظيًا عبر مسح باركود/QR من الموقع، مع عمل غير متصل (offline-first) لضعف التغطية بمواقع الإنشاءات.</li>
+      <li>مطابقة وتنبيهات آلية تُغني عن المراجعة اليدوية للسراكي.</li>
+      <li>طبقة بيانات تحليلية تُغذّي Power Query/Python ولوحات KPI وBSC دون التأثير على قاعدة الإنتاج.</li>
+      <li>صلاحيات هرمية بمستويات إدارة/إشراف/إدخال تحمي دقة الأجور وسرية بيانات العمال.</li>
+    </ul>
+
+    <h2 style="font-size:22px">3. هيكلة قواعد البيانات</h2>
+    <p>تصميم علائقي طبيعي (3NF) يحافظ على مفاتيح النظام الحالي (أكواد المقاول 1471xxxx، أكواد المهنة، أكواد الوقت) لتسهيل الترحيل.</p>
+
+    <table class="spec">
+      <tr><th>الجدول</th><th>الغرض</th><th>الحقول الأساسية</th><th>العلاقات</th></tr>
+      <tr><td><b>Contractors</b><br>مقاولو الباطن</td><td>كيان المقاول المنفّذ</td><td>ContractorCode PK، الاسم، نوع الأعمال (عمالة ذاتية/باطن)، حالة العمل، ملاحظات</td><td>1 → عدة Workers</td></tr>
+      <tr><td><b>Workers</b><br>العمال</td><td>سجل العامل وبطاقته وباركوده</td><td>WorkerCode PK، الاسم، رقم البطاقة، المهنة الافتراضية FK، ContractorCode FK، صورة الباركود/الكود، تاريخ التسجيل، أُنشئ بواسطة</td><td>FK → Contractors، Professions</td></tr>
+      <tr><td><b>Projects</b><br>المشاريع</td><td>موقع/مشروع الإنشاء</td><td>ProjectCode PK، اسم المشروع، الحالة، تاريخ البدء/الانتهاء</td><td>1 → عدة Zones</td></tr>
+      <tr><td><b>Zones</b><br>المناطق</td><td>منطقة/مبنى/دور داخل المشروع</td><td>ZoneCode PK، ProjectCode FK، المبنى، الدور</td><td>FK → Projects</td></tr>
+      <tr><td><b>Professions</b><br>المهن</td><td>تعريف المهنة وفئتها التسعيرية</td><td>ProfessionCode PK، المهنة، الفئة (A/B/C)، فئة سعر الساعة الإضافية، فئة خصم الساعة (تلقائي/يدوي)، تاريخ آخر زيادة، حالة الإيقاف</td><td>1 → عدة Workers/Sarak</td></tr>
+      <tr><td><b>ShiftDefinitions</b><br>تعريف الورديات</td><td>نموذج الوردية (بداية/نهاية/راحة)</td><td>ShiftCode PK، بداية العمل، نهاية العمل، مدة الراحة، عدد ساعات العمل، حساب الساعات كاملة (Boolean)</td><td>1 → عدة Sarak</td></tr>
+      <tr><td><b>SarakRecords</b><br>سجلات السراكي</td><td>أمر العمل اليومي للعامل — جوهر التسعير والمطابقة</td><td>SarakCode PK، التاريخ، ProjectCode FK، ContractorCode FK، ZoneCode FK، WorkerCode FK، ProfessionCode FK، خصم، ساعات إضافية، ساعات مشرف، بيان العمل، ShiftCode FK، خصم يومية (Boolean)، حالة المطابقة، أُنشئ/عُدّل بواسطة + طابع زمني</td><td>FK متعددة</td></tr>
+      <tr><td><b>AttendanceLog</b><br>الحضور والانصراف</td><td>كل مسح باركود فعلي (In/Out)</td><td>LogID PK، WorkerCode FK، التاريخ، الوقت، النوع (In/Out)، مصدر القراءة (جهاز/موقع GPS)، ملاحظات</td><td>FK → Workers</td></tr>
+      <tr><td><b>Users / Roles</b></td><td>حسابات الدخول والأدوار</td><td>UserID PK، الاسم، الدور، ContractorScope/ProjectScope (نطاق الرؤية)</td><td>يربط بكل الجداول عبر أُنشئ/عُدّل بواسطة</td></tr>
+    </table>
+    <p style="font-size:13px;color:var(--color-neutral-600)">تصميم <b>SarakRecords</b> ككيان مركزي بمفاتيح خارجية إلى Workers/Professions/Zones/Shifts يسمح بحساب الساعات والاستحقاقات بدالة واحدة، ويُبقي جدول AttendanceLog كسجل خام (append-only) للأثر الرقيق لمصدر الحقيقة الزمنية — يُغذّي SarakRecords وليس بديلًا عنه.</p>
+
+    <h2 style="font-size:22px">4. واجهة المستخدم وآلية الإدخال</h2>
+    <table class="spec">
+      <tr><th>الشاشة</th><th>المستخدم</th><th>الوظيفة</th></tr>
+      <tr><td>لوحة الإدارة المركزية</td><td>إدارة الموارد البشرية</td><td>إدارة المقاولين/العمال/المهن/الورديات، مراجعة المطابقات المعلّقة، تصدير التقارير</td></tr>
+      <tr><td>شاشة مراقب الموقع (موبايل/تابلت)</td><td>مراقب الموقع</td><td>مسح باركود العامل عبر كاميرا الجهاز لتسجيل حضور/انصراف لحظي، عرض قائمة العمال المتوقع حضورهم اليوم بالمشروع/المنطقة، إضافة بيان عمل وساعات إضافية للسرك</td></tr>
+      <tr><td>محطة الباركود الثابتة</td><td>بوابة الموقع</td><td>قارئ باركود/USB HID عند مدخل الموقع لتسجيل جماعي سريع دون فتح تطبيق</td></tr>
+      <tr><td>شاشة إصدار بطاقات العمال</td><td>إدارة</td><td>توليد وطباعة كود QR/Barcode فريد لكل عامل جديد (استمرار مباشر لآلية الطباعة الحالية)</td></tr>
+      <tr><td>لوحة KPI/BSC</td><td>الإدارة العليا</td><td>عرض تفاعلي لمؤشرات الأداء دون إدخال بيانات</td></tr>
+    </table>
+    <p>آلية الإدخال اللحظي: تطبيق ويب تقدّمي (PWA) يفتح كاميرا الجهاز لقراءة QR/Barcode الخاص بكل عامل، يُسجّل الحركة بطابع زمني ونوع (دخول/خروج)، ويعمل بذاكرة تخزين محلية (IndexedDB) عند انعدام الشبكة بالموقع، مع مزامنة تلقائية عند استعادة الاتصال — نفس منطق "In/Out" الموجود حاليًا في سجل الحضور، بواجهة حديثة بدل شاشة الجدول الخام.</p>
+
+    <h2 style="font-size:22px">5. أتمتة سير العمل</h2>
+    <ul>
+      <li><b>مطابقة تلقائية:</b> كل سرك يومي يُقارَن آليًا بسجلات AttendanceLog لنفس العامل/التاريخ؛ تطابق الساعات المسجَّلة مع بيان العمل يُحدّث "حالة المطابقة" إلى "مطابق" تلقائيًا (كما تُظهره الشاشة الحالية باللون الأخضر) دون تدخل بشري.</li>
+      <li><b>تنبيهات الاستثناءات:</b> غياب مسح دخول/خروج، فرق زمني عن الوردية المعرّفة، أو عامل مسجَّل في مشروعين بتوقيت متعارض — يُصدر تنبيهًا فوريًا لمراقب الموقع والمشرف المسؤول.</li>
+      <li><b>تحديث الحالات:</b> انتقال العامل بين المقاولين (كما تدعمه الشاشة الحالية "نقل عامل بين مقاولين") يُنشئ أثرًا تدقيقيًا (audit trail) ويُغلق الحركات المفتوحة على المقاول القديم آليًا.</li>
+      <li><b>تصعيد الموافقات:</b> ساعات إضافية تتجاوز حدًا معرّفًا لكل فئة مهنة تتطلب موافقة المشرف قبل ترحيلها للأجور.</li>
+    </ul>
+
+    <h2 style="font-size:22px">6. تحليل البيانات والتقارير</h2>
+    <p>تُنشأ طبقة تحليلية منفصلة (Data Warehouse/Views للقراءة فقط) تُغذّى من قاعدة الإنتاج عبر نسخ مجدول أو تدفق أحداث، لتُستهلك من:</p>
+    <ul>
+      <li><b>Power Query:</b> اتصال مباشر بواجهة SQL/REST لجداول العرض المجهزة (Views) — بديل مباشر لملفات Excel/Access الحالية.</li>
+      <li><b>Python (pandas):</b> عبر واجهة API أو تصدير Parquet/CSV مجدول، لتنظيف وتوحيد بيانات المهن والفئات وكشف الشذوذ في ساعات العمل.</li>
+      <li><b>مؤشرات SMART:</b> معدل الحضور بالمشروع، نسبة التطابق الآلي، ساعات إضافية لكل مقاول، تكلفة العمالة الفعلية مقابل المخطط — كل مؤشر بقيمة مستهدفة وتاريخ قياس.</li>
+      <li><b>بطاقة الأداء المتوازن:</b> أربعة محاور — المالي (تكلفة العمالة)، العمليات (دقة التسجيل ووقت المطابقة)، المقاولون (التزام الحضور)، النمو (تبني القراء الرقمي بالمواقع).</li>
+    </ul>
+
+    <h2 style="font-size:22px">7. الصلاحيات والأمان</h2>
+    <table class="spec">
+      <tr><th>المستوى</th><th>الصلاحيات</th></tr>
+      <tr><td>إدارة عليا</td><td>وصول كامل لكل المشاريع والمقاولين، التقارير والKPI، إدارة المستخدمين والأدوار</td></tr>
+      <tr><td>إشراف (مشروع/منطقة)</td><td>عرض وتعديل سراكي وحضور نطاقه فقط، موافقة الاستثناءات والساعات الإضافية، بلا صلاحية حذف سجلات مقفلة</td></tr>
+      <tr><td>إدخال بيانات (مراقب موقع)</td><td>تسجيل حضور/انصراف وإضافة بيان عمل لليوم الحالي فقط، بلا وصول لتقارير التكلفة أو بيانات مقاولين آخرين</td></tr>
+      <tr><td>مقاول باطن (وصول محدود اختياري)</td><td>عرض حضور عماله فقط، بلا تعديل</td></tr>
+    </table>
+    <p>أمان تقني: مصادقة موحدة (SSO/OAuth2)، تشفير بيانات العمال الحساسة (رقم البطاقة) أثناء التخزين والنقل (TLS + encryption-at-rest)، سجل تدقيق كامل لكل تعديل (من/متى — استمرارًا لحقل "تم إنشاؤه بواسطة" الحالي)، نسخ احتياطي تلقائي يومي مع نقطة استرجاع.</p>
+
+    <h2 style="font-size:22px">8. التقنيات السحابية المرشّحة</h2>
+    <table class="spec">
+      <tr><th>الطبقة</th><th>الترشيح</th><th>السبب</th></tr>
+      <tr><td>الواجهة الأمامية</td><td>React + PWA (أو Next.js)</td><td>دعم offline-first وكاميرا المسح، واجهة عربية RTL، نشر سريع للموبايل بدون متجر تطبيقات</td></tr>
+      <tr><td>الخلفية/API</td><td>Node.js (NestJS) أو .NET 8</td><td>نضج في أنظمة الموارد البشرية والمقاولات، دعم قوي لـ REST/GraphQL وWebSockets للتنبيهات الفورية</td></tr>
+      <tr><td>قاعدة البيانات</td><td>PostgreSQL مُدارة (Azure Database / Amazon RDS)</td><td>علائقية كاملة تحافظ على تصميم Access الحالي، دعم JSON للحقول المرنة، تكلفة أقل من SQL Server السحابي</td></tr>
+      <tr><td>التخزين والملفات</td><td>Azure Blob / Amazon S3</td><td>صور الباركود وبطاقات العمال</td></tr>
+      <tr><td>التحليلات</td><td>Views SQL + Power BI/Power Query، مهام Python مجدولة (Azure Functions/AWS Lambda)</td><td>فصل عبء التحليل عن قاعدة الإنتاج</td></tr>
+      <tr><td>الاستضافة</td><td>Azure App Service أو AWS Elastic Beanstalk، خلف CDN</td><td>ملاءمة للمنشآت المصرية/الخليجية القائمة على Microsoft Stack حاليًا (ترحيل أسهل من Access)</td></tr>
+    </table>
+
+    <h2 style="font-size:22px">9. خطة التنفيذ التدريجية</h2>
+
+    <div class="phase">
+      <span class="tag tag-accent">المرحلة 1 — 4 أسابيع</span>
+      <h3>الترحيل والأساس</h3>
+      <p>ترحيل جداول Access الحالية (مقاولون، عمال، مهن، ورديات، سراكي تاريخية) إلى PostgreSQL بنفس الأكواد، بناء API أساسي للقراءة/الكتابة، تجهيز بيئات Dev/Staging/Production.</p>
+    </div>
+    <div class="phase">
+      <span class="tag tag-accent">المرحلة 2 — 6 أسابيع</span>
+      <h3>لوحة الإدارة السحابية</h3>
+      <p>شاشات إدارة العمال/المقاولين/المهن/الورديات على الويب بديلاً لنماذج Access، مع صلاحيات الأدوار الأساسية وسجل تدقيق.</p>
+    </div>
+    <div class="phase">
+      <span class="tag tag-accent-2">المرحلة 3 — 5 أسابيع</span>
+      <h3>المسح اللحظي والعمل بدون اتصال</h3>
+      <p>تطبيق PWA لمراقبي المواقع بقراءة QR/Barcode بالكاميرا، تخزين محلي ومزامنة، شاشة توليد بطاقات العمال.</p>
+    </div>
+    <div class="phase">
+      <span class="tag tag-accent-2">المرحلة 4 — 4 أسابيع</span>
+      <h3>الأتمتة والتنبيهات</h3>
+      <p>محرك مطابقة السراكي بالحضور الفعلي، تنبيهات الاستثناءات وتصعيد الموافقات عبر البريد/إشعارات فورية.</p>
+    </div>
+    <div class="phase">
+      <span class="tag tag-neutral">المرحلة 5 — 4 أسابيع</span>
+      <h3>التحليلات ولوحات الأداء</h3>
+      <p>طبقة Views التحليلية، ربط Power Query، مهام Python للتنظيف، لوحات KPI وBSC.</p>
+    </div>
+    <div class="phase">
+      <span class="tag tag-neutral">المرحلة 6 — مستمر</span>
+      <h3>التشغيل والتحسين</h3>
+      <p>تشغيل موازٍ مع Access لفترة تحقق، ثم إيقاف النظام القديم، مراقبة الأداء والتكلفة السحابية، تحسينات دورية.</p>
+    </div>
+
+    <h2 style="font-size:22px">10. اعتبارات ومخاطر</h2>
+    <ul>
+      <li>ضعف تغطية الإنترنت بمواقع الإنشاءات — يُعالَج بالعمل غير المتصل ومزامنة مؤجلة، لا بالاعتماد الكامل على اتصال حي.</li>
+      <li>جودة بيانات الترحيل من Access (تكرارات، حقول نصية غير موحّدة في المهن) — تتطلب مرحلة تنظيف قبل الترحيل النهائي.</li>
+      <li>تدريب المستخدمين الحاليين (إدخال بيانات) على واجهة المسح الجديدة بدل الجدول اليدوي.</li>
+      <li>يُنصح بتشغيل مرحلة توازٍ (Parallel Run) لا تقل عن شهر قبل إيقاف نظام Access نهائيًا.</li>
+    </ul>
+
+  </div>
+</doc-page>
+
+</x-dc>
+</body>
+</html>

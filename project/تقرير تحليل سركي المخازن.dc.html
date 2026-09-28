@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/broadsheet-60b6b6f7-4da6-4861-a698-cdc2e96f33e5/styles.css">
+  <script src="_ds/broadsheet-60b6b6f7-4da6-4861-a698-cdc2e96f33e5/_ds_bundle.js"></script>
+  <style>
+    html,body{margin:0}
+    .rep{--color-accent:#2B3080;--color-accent-700:#22276b;--color-accent-100:#eceef8;--color-accent-200:#d5d9ef;--color-accent-2-700:#8a2b2b;--color-text:#3A3A3C;direction:rtl;font-family:var(--font-body);color:var(--color-text);line-height:1.65}
+    .rep h1,.rep h2,.rep h3{font-family:var(--font-heading);color:var(--color-accent-700);margin:0}
+    .rep table.dt{width:100%;border-collapse:collapse;font-size:12.5px}
+    .rep table.dt th{text-align:right;padding:7px 8px;border-bottom:2px solid var(--color-accent);font-family:var(--font-heading);font-weight:600;font-size:12px;color:var(--color-accent-700);vertical-align:bottom}
+    .rep table.dt td{padding:7px 8px;border-bottom:1px solid var(--color-neutral-300)}
+    .rep table.dt tfoot td{border-top:2px solid var(--color-accent);border-bottom:none;font-weight:700;color:var(--color-accent-700)}
+    .rep .num{direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+  </style>
+</helmet>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" hint-size="100%,100%">
+  <div class="rep">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:26px">
+      <div>
+        <div style="font-size:11.5px;letter-spacing:.08em;color:var(--color-neutral-600);margin-bottom:6px">تقرير تحليلى — إدارة الموارد البشرية والتخطيط</div>
+        <h1 style="font-size:27px;line-height:1.25">تحليل سركى العمالة المجمع — إدارة المخازن</h1>
+        <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px">مشروع إنشاء المقر الإدارى الجديد · الفترة من 16/08/2026 إلى 31/08/2026 · النموذج RE-CCW-001</div>
+      </div>
+      <img src="brand-logo.png" alt="الشروق للمقاولات العمومية والتوريدات" style="width:130px;flex:none"/>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:30px">
+      <div class="card elev-sm">
+        <div class="card-kicker">إجمالى المستحق للفترة</div>
+        <div class="num" style="font-family:var(--font-heading);font-size:25px;color:var(--color-accent-700)">44,119.89</div>
+        <div class="card-meta">ج.م · 16 يومًا · 9 عمال · 96 يومية</div>
+      </div>
+      <div class="card elev-sm">
+        <div class="card-kicker">متوسط التكلفة اليومية للمنطقة</div>
+        <div class="num" style="font-family:var(--font-heading);font-size:25px">2,757.49</div>
+        <div class="card-meta">ج.م/يوم · متوسط اليومية للعامل 459.58 ج.م</div>
+      </div>
+      <div class="card elev-sm" style="border-top:3px solid var(--color-accent-2-700)">
+        <div class="card-kicker">صافى الساعات الإضافية</div>
+        <div class="num" style="font-family:var(--font-heading);font-size:25px;color:var(--color-accent-2-700)">233.9</div>
+        <div class="card-meta">ساعة = 29.2 يومية · 9,725.41 ج.م (22% من التكلفة)</div>
+      </div>
+      <div class="card elev-sm">
+        <div class="card-kicker">نسبة الإضافى للأساسى</div>
+        <div class="num" style="font-family:var(--font-heading);font-size:25px">30.5%</div>
+        <div class="card-meta">765.8 ساعة أساسية مقابل 233.9 ساعة إضافية</div>
+      </div>
+    </div>
+
+    <h2 style="font-size:19px;margin-bottom:4px">1 · الكفاءة المالية — توزيع التكلفة على المهن</h2>
+    <p style="font-size:13.5px;color:var(--color-neutral-700);margin:0 0 12px">التوزيع محتسب على الفئة المحاسبية المعتمدة فى السركى (قيمة اليومية 8 ساعات عمل)، وساعة الإضافى تساوى ساعة العمل العادية دون زيادة.</p>
+    <table class="dt" style="margin-bottom:14px">
+      <thead>
+        <tr><th>الفئة المحاسبية</th><th>قيمة اليومية</th><th>قيمة الساعة</th><th>ساعات أساسية</th><th>قيمة الأساسى</th><th>ساعات إضافية</th><th>قيمة الإضافى</th><th>بدل المنطقة</th><th>إجمالى البند</th><th>الوزن</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>عامل مخازن — A5-5</td><td class="num">300.00</td><td class="num">37.50</td>
+          <td class="num">551.0</td><td class="num">20,662.50</td><td class="num">189.0</td><td class="num">7,087.50</td><td class="num">—</td>
+          <td class="num">27,750.00</td><td><span class="tag tag-accent">62.9%</span></td>
+        </tr>
+        <tr>
+          <td>فنى كهرباء (منتج) — C</td><td class="num">470.00</td><td class="num">58.75</td>
+          <td class="num">127.8</td><td class="num">7,508.25</td><td class="num">44.9</td><td class="num">2,637.91</td><td class="num">840.00</td>
+          <td class="num">10,986.16</td><td><span class="tag tag-accent">24.9%</span></td>
+        </tr>
+        <tr>
+          <td>فنى شدة معدنية — D</td><td class="num">450.00</td><td class="num">56.25</td>
+          <td class="num">79.0</td><td class="num">4,443.73</td><td class="num">0.0</td><td class="num">0.00</td><td class="num">450.00</td>
+          <td class="num">4,893.73</td><td><span class="tag tag-outline">11.1%</span></td>
+        </tr>
+        <tr>
+          <td>فنى كهرباء (خدمة موقع) — D</td><td class="num">430.00</td><td class="num">53.75</td>
+          <td class="num">8.0</td><td class="num">430.00</td><td class="num">0.0</td><td class="num">0.00</td><td class="num">60.00</td>
+          <td class="num">490.00</td><td><span class="tag tag-outline">1.1%</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr><td>الإجمالى</td><td class="num">—</td><td class="num">—</td><td class="num">765.8</td><td class="num">33,044.48</td><td class="num">233.9</td><td class="num">9,725.41</td><td class="num">1,350.00</td><td class="num">44,119.89</td><td>100%</td></tr>
+      </tfoot>
+    </table>
+    <p style="font-size:13.5px;margin:0 0 26px">قراءة النتيجة: <strong>عمالة المخازن غير الفنية تستهلك 62.9% من موازنة المنطقة</strong> بينما تمثل الأعمال الفنية (كهرباء + شدة معدنية) 37.1% منها. وحدها ساعات الإضافى تعادل 22% من إجمالى المستحق — أى أن ما يقارب ربع الميزانية اليومية يُشترى بسعر تواجد إضافى لا بسعر تشغيل مخطط.</p>
+
+    <h2 style="font-size:19px;margin-bottom:4px">2 · مراقبة الساعات الإضافية</h2>
+    <p style="font-size:13.5px;color:var(--color-neutral-700);margin:0 0 12px">مقياس التقييم: نسبة صافى الإضافى إلى الساعات الأساسية للعامل. الحد المهنى المقبول فى مشاريع التشييد 10–15%.</p>
+    <table class="dt" style="margin-bottom:14px">
+      <thead><tr><th>العامل</th><th>المهنة</th><th>أيام عمل</th><th>أساسى (س)</th><th>إضافى (س)</th><th>النسبة</th><th>التقييم</th></tr></thead>
+      <tbody>
+        <tr><td>محمود محمد عبدالتواب رشوان</td><td>عامل تسليمات</td><td class="num">14</td><td class="num">112.0</td><td class="num">49.7</td><td class="num">44.4%</td><td><span class="tag tag-accent-2">تجاوز حاد</span></td></tr>
+        <tr><td>مصطفى مخلف على فهمى حسن</td><td>عامل نظافة</td><td class="num">14</td><td class="num">112.0</td><td class="num">49.6</td><td class="num">44.3%</td><td><span class="tag tag-accent-2">تجاوز حاد</span></td></tr>
+        <tr><td>هشام محمود محجوب محمد</td><td>فنى كهرباء (منتج)</td><td class="num">14</td><td class="num">112.0</td><td class="num">44.9</td><td class="num">40.1%</td><td><span class="tag tag-accent-2">تجاوز حاد</span></td></tr>
+        <tr><td>حسام صفوت عيد احمد</td><td>عامل مخزن</td><td class="num">16</td><td class="num">127.2</td><td class="num">37.2</td><td class="num">29.2%</td><td><span class="tag tag-accent">مرتفع</span></td></tr>
+        <tr><td>احمد محمد صابر محمد</td><td>عامل مخزن</td><td class="num">10</td><td class="num">79.9</td><td class="num">22.7</td><td class="num">28.4%</td><td><span class="tag tag-accent">مرتفع</span></td></tr>
+        <tr><td>محمد عبدالعليم راجح احمد</td><td>عامل مخزن</td><td class="num">15</td><td class="num">119.9</td><td class="num">29.8</td><td class="num">24.9%</td><td><span class="tag tag-accent">مرتفع</span></td></tr>
+        <tr><td>محمود مرزوق محمود خليل</td><td>فنى شدة معدنية</td><td class="num">10</td><td class="num">79.0</td><td class="num">0.0</td><td class="num">0%</td><td><span class="tag tag-outline">منتظم</span></td></tr>
+        <tr><td>طلعت عصام على حسن</td><td>فنى كهرباء (منتج)</td><td class="num">2</td><td class="num">15.8</td><td class="num">0.0</td><td class="num">0%</td><td><span class="tag tag-outline">عمالة عابرة</span></td></tr>
+        <tr><td>عبدالرحمن احمد عبدالعزيز مصطفى</td><td>فنى كهرباء (خدمة موقع)</td><td class="num">1</td><td class="num">8.0</td><td class="num">0.0</td><td class="num">0%</td><td><span class="tag tag-outline">عمالة عابرة</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13.5px;margin:0 0 26px">التشخيص: <strong>أربعة عمال فقط يستحوذون على 77.6% من إجمالى الإضافى</strong> (181.4 من 233.9 ساعة)، وثلاثتهم فى نطاق 40–44% — وهو نمط لا يفسّره ذروة عمل مؤقتة بل <em>نقص هيكلى فى ملاك الوردية المسائية</em> لأنشطة التسليمات والنظافة والطوارئ الكهربائية. فى المقابل تعمل عمالة الشدة المعدنية والخدمة الموقعية بصفر إضافى — أى أن الخلل توزيعى داخل نفس المنطقة وليس عامًّا. الإضافى المسجَّل (233.9 ساعة) يعادل 29 يومية كاملة، وهو ما يمكن تغطيته بعاملين على وردية ثانية معرّفة بتكلفة أقل.</p>
+
+    <h2 style="font-size:19px;margin-bottom:4px">3 · التشخيص المؤسسى — أنماط الإرهاق وتباين البيانات</h2>
+    <table class="dt" style="margin-bottom:14px">
+      <thead><tr><th>المؤشر</th><th>القراءة من السجل</th><th>الدلالة الإدارية</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>يوميات بتواجد ≥ 12 ساعة</td>
+          <td class="num" style="text-align:right">46 من 96 يومية (48%)</td>
+          <td>نصف اليوميات تتجاوز حد التواجد الآمن للوردية العمالية (9 ساعات بساعة راحة)</td>
+        </tr>
+        <tr>
+          <td>يوميات بتواجد ≥ 13 ساعة</td>
+          <td class="num" style="text-align:right">22 يومية · الأقصى 15.5 ساعة (19/08)</td>
+          <td>إرهاق تراكمى ومخاطر سلامة وأخطاء مناولة فى الساعات الأخيرة</td>
+        </tr>
+        <tr>
+          <td>أيام متصلة عالية الإجهاد</td>
+          <td>محمود عبدالتواب: 16→19/08 بتواجد 13.1 / 14.1 / 14.2 / 15.5 ساعة</td>
+          <td>أربعة أيام متتالية بلا يوم استرداد — أعلى مخاطرة فردية فى الفترة</td>
+        </tr>
+        <tr>
+          <td>خروج بعد 22:00</td>
+          <td class="num" style="text-align:right">20 يومية · مقابل 0 ساعة مسجَّلة فى بند «ما بعد 12 ليلًا»</td>
+          <td>عمل مسائى ممتد يُدار كإضافى مفتوح لا كوردية معرّفة</td>
+        </tr>
+        <tr>
+          <td>دخول متأخر ≥ 09:30</td>
+          <td class="num" style="text-align:right">22 يومية (عاملان بصفة منتظمة)</td>
+          <td>وردية منزاحة فعليًا (10:00–23:00) تُقاس على معيار وردية 08:00–17:00</td>
+        </tr>
+        <tr style="background:var(--color-accent-100)">
+          <td>تطابق بصمات بين كودين</td>
+          <td>13610028 و 13610183 لهما نفس أوقات الدخول والخروج فى 8 أيام (منها 09:54–23:59 و 07:42–23:10)</td>
+          <td><strong>خلل جوهرى فى سلامة البيانات</strong> — إدخال جماعى أو استخدام بصمة واحدة لعاملين</td>
+        </tr>
+        <tr>
+          <td>تكرار كود السرك</td>
+          <td>الكود 7150 مستخدم 4 مرات · 7139–7148 بين 2 و3 مرات</td>
+          <td>الترقيم غير فريد فيتعذر تتبع اليومية أو مراجعتها مستنديًا</td>
+        </tr>
+        <tr>
+          <td>بيان العمل</td>
+          <td>نص واحد ثابت لكل عامل عبر 14–16 يومية</td>
+          <td>لا يسمح بربط التكلفة بنشاط مقيس — تكلفة تواجد لا تكلفة إنتاج</td>
+        </tr>
+        <tr>
+          <td>الأجازات الأسبوعية</td>
+          <td>21/08: 3 عمال · 28/08: عاملان (مقابل 5–8 فى بقية الأيام)</td>
+          <td>توقف جزئى غير مخطط ينقل الحمل إلى أيام الأسبوع فيولّد الإضافى</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:13.5px;margin:0 0 26px">تباين غير منطقى يستوجب التسوية قبل الاعتماد: عاملان بمهنتين مختلفتين (تسليمات ونظافة) يُحتسبان على نفس الفئة المحاسبية (عامل مخازن A5-5 بقيمة 300 ج.م) وبنفس البصمات — ما يجعل 12,123.75 ج.م من إجمالى المستحق (27.5%) قائمة على سجل زمنى مكرر لا يمكن التحقق منه ميدانيًا.</p>
+
+    <h2 style="font-size:19px;margin-bottom:4px">4 · الجدول المحلى (Pivot) — العامل × المهنة × الساعات × التكلفة</h2>
+    <table class="dt" style="margin-bottom:26px">
+      <thead><tr><th>كود العامل</th><th>اسم العامل</th><th>المهنة</th><th>الفئة</th><th>أيام</th><th>أساسى (س)</th><th>إضافى (س)</th><th>إجمالى الساعات</th><th>إجمالى التكلفة (ج.م)</th><th>تكلفة اليومية</th></tr></thead>
+      <tbody>
+        <tr><td class="num">13610007</td><td>حسام صفوت عيد احمد</td><td>عامل مخزن</td><td>A5-5</td><td class="num">16</td><td class="num">127.2</td><td class="num">37.2</td><td class="num">164.4</td><td class="num">6,165.00</td><td class="num">385.31</td></tr>
+        <tr><td class="num">13610028</td><td>محمود محمد عبدالتواب رشوان</td><td>عامل تسليمات</td><td>A5-5</td><td class="num">14</td><td class="num">112.0</td><td class="num">49.7</td><td class="num">161.7</td><td class="num">6,063.75</td><td class="num">433.13</td></tr>
+        <tr><td class="num">13610092</td><td>احمد محمد صابر محمد</td><td>عامل مخزن</td><td>A5-5</td><td class="num">10</td><td class="num">79.9</td><td class="num">22.7</td><td class="num">102.6</td><td class="num">3,847.50</td><td class="num">384.75</td></tr>
+        <tr><td class="num">13610187</td><td>محمد عبدالعليم راجح احمد</td><td>عامل مخزن</td><td>A5-5</td><td class="num">15</td><td class="num">119.9</td><td class="num">29.8</td><td class="num">149.7</td><td class="num">5,613.75</td><td class="num">374.25</td></tr>
+        <tr><td class="num">13610183</td><td>مصطفى مخلف على فهمى حسن</td><td>عامل نظافة</td><td>A5-5</td><td class="num">14</td><td class="num">112.0</td><td class="num">49.6</td><td class="num">161.6</td><td class="num">6,060.00</td><td class="num">432.86</td></tr>
+        <tr><td class="num">13610093</td><td>هشام محمود محجوب محمد</td><td>فنى كهرباء (منتج)</td><td>C</td><td class="num">14</td><td class="num">112.0</td><td class="num">44.9</td><td class="num">156.9</td><td class="num">10,057.91</td><td class="num">718.42</td></tr>
+        <tr><td class="num">13610193</td><td>طلعت عصام على حسن</td><td>فنى كهرباء (منتج)</td><td>C</td><td class="num">2</td><td class="num">15.8</td><td class="num">0.0</td><td class="num">15.8</td><td class="num">928.25</td><td class="num">464.13</td></tr>
+        <tr><td class="num">13610119</td><td>عبدالرحمن احمد عبدالعزيز مصطفى</td><td>فنى كهرباء (خدمة موقع)</td><td>D</td><td class="num">1</td><td class="num">8.0</td><td class="num">0.0</td><td class="num">8.0</td><td class="num">490.00</td><td class="num">490.00</td></tr>
+        <tr><td class="num">13610121</td><td>محمود مرزوق محمود خليل</td><td>فنى شدة معدنية</td><td>D</td><td class="num">10</td><td class="num">79.0</td><td class="num">0.0</td><td class="num">79.0</td><td class="num">4,893.73</td><td class="num">489.37</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="4">الإجمالى — 9 عمال</td><td class="num">96</td><td class="num">765.8</td><td class="num">233.9</td><td class="num">999.7</td><td class="num">44,119.89</td><td class="num">459.58</td></tr>
+      </tfoot>
+    </table>
+
+    <h2 style="font-size:19px;margin-bottom:12px">5 · التوصيات التنفيذية لإدارة الموارد البشرية</h2>
+    <div style="display:grid;gap:14px;margin-bottom:24px">
+      <div class="card elev-sm" style="border-top:3px solid var(--color-accent)">
+        <div class="card-kicker">توصية 1 — استبدال الإضافى بوردية ثانية معرّفة</div>
+        <div class="card-title" style="font-size:16px;margin-bottom:6px">إنشاء وردية مسائية 14:00–23:00 لأنشطة التسليمات والنظافة والطوارئ الكهربائية</div>
+        <div class="card-body" style="font-size:13.5px">الإضافى المسجَّل 233.9 ساعة (9,725.41 ج.م) يعادل 29 يومية كاملة يمكن استيعابها بعاملين على الوردية الثانية بفئة 300 ج.م/يوم (≈ 8,700 ج.م لـ 29 يومية) مع إلغاء التواجد الممتد. الأثر المتوقع: خفض بند الإضافى بنسبة 35–40% خلال دورة صرف واحدة، وتثبيت التكلفة اليومية للمنطقة عند حد مخطط بدل تقلّبها بين 592 و4,082 ج.م.</div>
+      </div>
+      <div class="card elev-sm" style="border-top:3px solid var(--color-accent-2-700)">
+        <div class="card-kicker">توصية 2 — سقف إضافى وحد تواجد آمن باعتماد مسبق</div>
+        <div class="card-title" style="font-size:16px;margin-bottom:6px">حد أقصى 2 ساعات إضافية يوميًا و12 ساعة أسبوعيًا، وحد تواجد 12 ساعة لا يُتجاوز إلا باعتماد مدير التنفيذ</div>
+        <div class="card-body" style="font-size:13.5px">يُطبَّق أولًا على الحالات الأربع المستحوذة على 77.6% من الإضافى، مع يوم استرداد إلزامى بعد ثلاثة أيام متصلة تجاوز 12 ساعة. يُضبط السقف داخل النظام على مصفوفة الصلاحيات فيُمنع اعتماد يومية مخالفة قبل موافقة مسجَّلة، فتنتقل الرقابة من مراجعة لاحقة إلى منع مسبق.</div>
+      </div>
+      <div class="card elev-sm" style="border-top:3px solid var(--color-accent)">
+        <div class="card-kicker">توصية 3 — ضبط سلامة السجل وربطه بالإنتاج</div>
+        <div class="card-title" style="font-size:16px;margin-bottom:6px">كود سرك فريد لكل عامل/يوم، منع تطابق بصمتين، وربط بيان العمل بأمر عمل مقيس</div>
+        <div class="card-body" style="font-size:13.5px">تسوية فورية للسجلات المتطابقة بين الكودين 13610028 و13610183 قبل الصرف (27.5% من المستحق)، وتفعيل تحقّق آلى يرفض تطابق أوقات بصمة لعاملين مختلفين أو تكرار كود سرك. ثم استبدال بيان العمل النصى الثابت ببنود قياس (عدد أوامر الصرف، أطنان المناولة، أوامر الصيانة المنجزة) لاحتساب تكلفة الوحدة المنتجة بدل تكلفة ساعة التواجد.</div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:var(--color-neutral-600);border-top:1px solid var(--color-neutral-300);padding-top:10px">
+      المصدر: سركى مجمع لعمالة المقاول — إدارة المخازن (RE-CCW-001) للفترة 16–31/08/2026 · 96 يومية لتسعة عمال · التحليل محتسب على أساس اليومية 9 ساعات منها ساعة راحة (8 ساعات عمل) وساعة إضافى بقيمة ساعة العمل العادية · شركة الشروق للمقاولات العمومية والتوريدات للقطاع العام.
+    </div>
+  </div>
+</x-import>
+</x-dc>
+</body>
+</html>

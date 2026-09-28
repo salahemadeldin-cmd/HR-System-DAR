@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#0f3d2e">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#2B3080"/>
+    <rect x="360" y="220" width="480" height="360" rx="28" fill="#ECEEF8"/>
+    <rect x="410" y="290" width="380" height="34" rx="8" fill="#2B3080"/>
+    <rect x="410" y="356" width="240" height="22" rx="6" fill="#D5D9EF"/>
+    <rect x="410" y="404" width="300" height="22" rx="6" fill="#D5D9EF"/>
+    <rect x="410" y="452" width="180" height="22" rx="6" fill="#D5D9EF"/>
+    <circle cx="750" cy="486" r="46" fill="#22276B"/>
+    <path d="M728 486l16 17 30-33" stroke="#ECEEF8" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</template>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="_ds/broadsheet-60b6b6f7-4da6-4861-a698-cdc2e96f33e5/styles.css">
+  <script src="_ds/broadsheet-60b6b6f7-4da6-4861-a698-cdc2e96f33e5/_ds_bundle.js"></script>
+  <style>
+    html,body{margin:0}
+    .app{--color-accent:#2B3080;--color-accent-700:#22276b;--color-accent-100:#eceef8;--color-accent-200:#d5d9ef;--color-accent-2-700:#8a2b2b;--color-text:#3A3A3C;direction:rtl;font-family:var(--font-body);background:var(--color-bg);color:var(--color-text);min-height:100vh;display:flex}
+    .side{width:230px;flex:none;background:var(--color-surface);padding:var(--space-4) var(--space-3);display:flex;flex-direction:column;gap:var(--space-2);border-inline-start:1px solid var(--color-divider)}
+    .side .brand{margin-bottom:var(--space-4)}
+    .side .brand img{width:100%;max-width:150px;display:block;margin:0 auto var(--space-2)}
+    .side .brand .sys{font-family:var(--font-heading);font-size:13px;font-weight:600;text-align:center;color:var(--color-accent);border-top:1px solid var(--color-divider);padding-top:8px}
+    .navitem{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--radius-md);cursor:pointer;font-size:14.5px;color:var(--color-neutral-800)}
+    .navitem:hover{background:var(--color-accent-100)}
+    .navitem.active{background:var(--color-accent-100);color:var(--color-accent-700);font-weight:600}
+    .main{flex:1;padding:var(--space-6) var(--space-8);overflow:auto;max-height:100vh}
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-bottom:var(--space-6)}
+    .kpi-num{font-family:var(--font-heading);font-size:34px;font-weight:600}
+    .toolbar{display:flex;gap:var(--space-3);align-items:center;margin-bottom:var(--space-4);flex-wrap:wrap}
+    table.dt{width:100%;border-collapse:collapse;font-size:14px}
+    table.dt th{text-align:right;padding:10px 12px;border-bottom:2px solid var(--color-accent);font-family:var(--font-heading);font-weight:600;font-size:13px;color:var(--color-accent-700)}
+    table.dt td{padding:10px 12px;border-bottom:1px solid var(--color-neutral-300)}
+    table.dt tr:hover td{background:var(--color-neutral-100)}
+    .phone{width:340px;margin:0 auto;background:var(--color-text);border-radius:28px;padding:14px}
+    .phone-screen{background:var(--color-bg);border-radius:18px;padding:var(--space-4);min-height:520px;display:flex;flex-direction:column;gap:var(--space-3)}
+    .scan-target{aspect-ratio:1;border:3px dashed var(--color-accent);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:var(--color-accent-700);font-size:13px;background:var(--color-accent-100)}
+    .alert-card{display:flex;gap:12px;align-items:flex-start;padding:var(--space-3) 0;border-bottom:1px solid var(--color-neutral-300)}
+    .segwrap{display:inline-flex;border:1px solid var(--color-neutral-400);border-radius:var(--radius-md);overflow:hidden}
+    .segwrap button{border:none;background:transparent;padding:8px 16px;font-family:var(--font-body);font-size:13px;cursor:pointer;color:var(--color-neutral-700)}
+    .segwrap button.on{background:var(--color-accent);color:#fff}
+    input.date-input{font-family:var(--font-body);text-align:left;position:relative;cursor:pointer}
+    input.date-input::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.75;filter:invert(31%) sepia(84%) saturate(1500%) hue-rotate(165deg)}
+    input.date-input:hover::-webkit-calendar-picker-indicator{opacity:1}
+    input.date-input:hover{border-color:var(--color-accent)}
+    input.date-input:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+  </style>
+</helmet>
+<div class="app">
+
+  <nav class="side">
+    <div class="brand">
+      <img src="brand-logo.png" alt="الشروق للمقاولات العمومية والتوريدات"/>
+      <div class="sys">نظام تسجيل الحضور السحابي — EADRS</div>
+    </div>
+    <div class="navitem {{ dashboardActive }}" onClick="{{ nav.dashboard }}">🏠︀ لوحة التحكم</div>
+    <div class="navitem {{ analyticsActive }}" onClick="{{ nav.analytics }}">📊︀ تحليل الحضور والتنبّؤ</div>
+    <div class="navitem {{ workersActive }}" onClick="{{ nav.workers }}">👥︀ العمال</div>
+    <div class="navitem {{ contractorsActive }}" onClick="{{ nav.contractors }}">🏗︀ المقاولون</div>
+    <div class="navitem {{ professionsActive }}" onClick="{{ nav.professions }}">🛠︀ المهن وفئات الأجر</div>
+    <div class="navitem {{ shiftsActive }}" onClick="{{ nav.shifts }}">🕒︀ الورديات</div>
+    <div class="navitem {{ scanActive }}" onClick="{{ nav.scan }}">📷︀ تسجيل الحضور (QR)</div>
+    <div class="navitem {{ attendanceLogActive }}" onClick="{{ nav.attendanceLog }}">🗓︀ سجل الحضور الكامل</div>
+    <div class="navitem {{ sarakActive }}" onClick="{{ nav.sarak }}">📋︀ السراكي والمطابقة</div>
+    <div class="navitem {{ alertsActive }}" onClick="{{ nav.alerts }}">⚠︀ التنبيهات <span class="tag tag-accent-2" style="margin-inline-start:auto">{{ alertCount }}</span></div>
+    <div class="navitem {{ projectSheetActive }}" onClick="{{ nav.projectSheet }}">🗂︀ نموذج بيانات المشروع</div>
+    <div class="navitem {{ uploadActive }}" onClick="{{ nav.upload }}">⬆︀ رفع بيانات وملفات</div>
+    <div class="navitem {{ reportsActive }}" onClick="{{ nav.reports }}">📈︀ التقارير</div>
+    <div class="navitem {{ usersActive }}" onClick="{{ nav.users }}">🔐︀ المستخدمون والصلاحيات</div>
+    <div style="margin-top:auto;font-size:12px;color:var(--color-neutral-600);padding:8px 12px">{{ scopeLabel }}</div>
+  </nav>
+
+  <main class="main">
+
+    <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <h1 style="font-size:26px;margin-bottom:2px">لوحة التحكم الرئيسية</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-5)">نظرة يومية على الحضور والمطابقة والاستحقاقات — {{ scopeLabel }}</p>
+      <div class="kpi-grid">
+        <sc-for list="{{ dashboardKpis }}" as="k" hint-placeholder-count="4">
+          <div class="card elev-sm">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-2)">
+              <div>
+                <div class="card-kicker">{{ k.label }}</div>
+                <div style="font-size:11px;color:var(--color-neutral-500);letter-spacing:.04em">{{ k.code }}</div>
+              </div>
+              <button class="btn btn-ghost" title="حذف المؤشر" style="padding:2px 8px;font-size:15px;line-height:1;color:var(--color-accent-2-700)" onClick="{{ k.deleteHandler }}">✕</button>
+            </div>
+            <div class="kpi-num" style="color:{{ k.color }}">{{ k.value }}</div>
+            <div class="card-meta">{{ k.meta }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ hasHiddenKpis }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-bottom:var(--space-5);display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap">
+          <span style="font-size:13px;color:var(--color-neutral-600)">مؤشرات محذوفة ({{ hiddenKpiCount }}) — محفوظة في النسخة الاحتياطية</span>
+          <button class="btn btn-ghost" style="font-size:13px" onClick="{{ restoreKpis }}">استعادة الكل</button>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:baseline;justify-content:space-between;margin-bottom:var(--space-4);font-size:13px;color:var(--color-neutral-600)">
+        <span>مصدر الحضور: {{ ov.logSource }}</span>
+        <span>بصمات غير مرتبطة بملف عامل: {{ ov.unlinkedPunches }}</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-bottom:var(--space-6)">
+        <div class="card elev-sm" style="border-top:3px solid var(--color-accent)">
+          <div class="card-kicker">إجمالي عمال السراكي المسجلين</div>
+          <div class="kpi-num" style="color:var(--color-accent-700)">{{ ov.totalRegistered }}</div>
+          <div class="card-meta">في {{ ov.projectCount }} مشروع · {{ ov.contractorCount }} مقاول</div>
+        </div>
+        <div class="card elev-sm" style="border-top:3px solid var(--color-accent)">
+          <div class="card-kicker">الحاضرون اليوم</div>
+          <div class="kpi-num" style="color:var(--color-accent-700)">{{ ov.presentToday }}</div>
+          <div class="card-meta">{{ ov.presentTodayPct }}% من {{ ov.enrolledLabel }} عامل على أجهزة البصمة · {{ ov.today }}</div>
+        </div>
+        <div class="card elev-sm" style="border-top:3px solid var(--color-accent)">
+          <div class="card-kicker">الحاضرون هذا الشهر</div>
+          <div class="kpi-num">{{ ov.presentMonth }}</div>
+          <div class="card-meta">عامل مختلف سجّل حركة · {{ ov.monthLabel }}</div>
+        </div>
+        <div class="card elev-sm" style="border-top:3px solid var(--color-accent-2-700)">
+          <div class="card-kicker">الغياب اليوم</div>
+          <div class="kpi-num" style="color:var(--color-accent-2-700)">{{ ov.absentToday }}</div>
+          <div class="card-meta">مسجل على البصمة ولم يسجل حركة دخول اليوم</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:var(--space-5);margin-bottom:var(--space-6)">
+        <div class="card elev-sm">
+          <div class="card-title" style="margin-bottom:var(--space-3)">العمال والحضور بحسب المشروع</div>
+          <table class="dt">
+            <thead><tr><th>المشروع</th><th>المقاولون</th><th>مسجلون</th><th>حاضرون</th><th>نسبة الحضور</th></tr></thead>
+            <tbody>
+              <sc-for list="{{ projectRows }}" as="p" hint-placeholder-count="3">
+                <tr>
+                  <td><strong>{{ p.code }}</strong> — {{ p.name }}</td>
+                  <td>{{ p.contractors }}</td>
+                  <td>{{ p.registered }}</td>
+                  <td>{{ p.present }}</td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:8px">
+                      <div style="flex:1;min-width:60px;background:var(--color-neutral-200);border-radius:4px;height:8px;overflow:hidden">
+                        <div style="height:100%;border-radius:4px;background:{{ p.barColor }};width:{{ p.pct }}%"></div>
+                      </div>
+                      <span style="font-size:13px;font-weight:600;color:{{ p.barColor }};white-space:nowrap">{{ p.pctLabel }}</span>
+                    </div>
+                  </td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <div class="card elev-sm">
+          <div class="card-title" style="margin-bottom:var(--space-3)">التوزيع الوظيفي للعمالة</div>
+          <sc-for list="{{ roleRows }}" as="r" hint-placeholder-count="4">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--color-neutral-300)">
+              <div>
+                <div style="font-size:14px;font-weight:600">{{ r.label }}</div>
+                <div style="font-size:12px;color:var(--color-neutral-600)">{{ r.hint }}</div>
+              </div>
+              <div style="text-align:left">
+                <div style="font-family:var(--font-heading);font-size:24px;font-weight:600;color:var(--color-accent-700)">{{ r.count }}</div>
+                <div style="font-size:12px;color:var(--color-neutral-600)">{{ r.pct }}% · حاضر {{ r.present }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:var(--space-5)">
+        <div class="card elev-sm">
+          <div class="card-title" style="margin-bottom:var(--space-3)">الحضور بحسب المهنة</div>
+          <sc-for list="{{ professionBars }}" as="p" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+              <div style="width:120px;font-size:13px">{{ p.name }}</div>
+              <div style="flex:1;background:var(--color-neutral-200);border-radius:4px;height:10px;overflow:hidden">
+                <div style="height:100%;background:var(--color-accent);border-radius:4px;width:{{ p.pct }}%"></div>
+              </div>
+              <div style="width:32px;font-size:12px;color:var(--color-neutral-600);text-align:left">{{ p.count }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div class="card elev-sm">
+          <div class="card-title" style="margin-bottom:var(--space-2)">أحدث التنبيهات</div>
+          <sc-for list="{{ topAlerts }}" as="a" hint-placeholder-count="3">
+            <div class="alert-card">
+              <span class="tag {{ a.tagClass }}">{{ a.level }}</span>
+              <div>
+                <div style="font-size:14px">{{ a.text }}</div>
+                <div style="font-size:12px;color:var(--color-neutral-600)">{{ a.time }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isWorkers }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">إدارة العمال والمقاولين</h1>
+      <div class="toolbar">
+        <span class="tag tag-accent">{{ activeContractorLabel }}</span>
+        <span class="tag tag-neutral">{{ activeContractorCount }} عامل</span>
+        <div class="field" style="margin:0 0 0 auto;min-width:260px">
+          <input class="input" placeholder="بحث بالاسم أو الكود…" value="{{ workerSearch }}" onChange="{{ onSearchChange }}"/>
+        </div>
+        <button class="btn btn-primary" onClick="{{ toggleWorkerForm }}">{{ workerFormLabel }}</button>
+      </div>
+      <sc-if value="{{ showWorkerForm }}" hint-placeholder-val="{{ false }}">
+        <div class="card elev-sm" style="margin-bottom:var(--space-4)">
+          <div class="card-title" style="margin-bottom:var(--space-3)">بيانات العامل الجديد</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)">
+            <div class="field"><label>اسم العامل</label><input class="input" placeholder="الاسم رباعي" value="{{ nw.name }}" onChange="{{ onNwName }}"/></div>
+            <div class="field"><label>كود العامل</label><input class="input" placeholder="{{ nextWorkerCode }}" value="{{ nw.code }}" onChange="{{ onNwCode }}"/></div>
+            <div class="field"><label>المهنة</label>
+              <select class="input" value="{{ nw.profession }}" onChange="{{ onNwProfession }}">
+                <option value="">اختر مهنة</option>
+                <sc-for list="{{ availableProfessionTitles }}" as="t" hint-placeholder-count="5">
+                  <option value="{{ t }}">{{ t }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <div class="field"><label>رقم البطاقة</label><input class="input" placeholder="14 رقماً" value="{{ nw.card }}" onChange="{{ onNwCard }}"/></div>
+            <div class="field"><label>بدل المنطقة (جنيه/يوم)</label><input class="input" placeholder="0" value="{{ nw.allowance }}" onChange="{{ onNwAllowance }}"/></div>
+            <div class="field"><label>الفئة</label>
+              <select class="input" value="{{ nw.category }}" onChange="{{ onNwCategory }}">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+              </select>
+            </div>
+            <div class="field"><label>تاريخ التسجيل</label><input class="input date-input" type="date" lang="en-GB" dir="ltr" value="{{ nwRegDateIso }}" onChange="{{ onNwRegDate }}"/></div>
+            <div class="field"><label>تاريخ أول يوم عمل</label><input class="input date-input" type="date" lang="en-GB" dir="ltr" value="{{ nwStartDateIso }}" onChange="{{ onNwStartDate }}"/></div>
+            <div class="field"><label>المقاول التابع له</label>
+              <select class="input" value="{{ nw.contractor }}" onChange="{{ onNwContractor }}">
+                <sc-for list="{{ contractors }}" as="c" hint-placeholder-count="3">
+                  <option value="{{ c.code }}">{{ c.code }} — {{ c.name }}</option>
+                </sc-for>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:var(--space-3);align-items:center;margin-top:var(--space-3)">
+            <button class="btn btn-primary" onClick="{{ addWorker }}">حفظ العامل</button>
+            <span style="font-size:13px;color:var(--color-neutral-600)">اسم المقاول: {{ nwContractorName }}</span>
+          </div>
+        </div>
+      </sc-if>
+      <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center;justify-content:space-between;margin:var(--space-3) 0;font-size:13px;color:var(--color-neutral-600)">
+        <span>{{ workerViewNote }}</span>
+        <span>القاعدة الفعلية: {{ dsSelf }} عامل ذاتى · {{ dsSub }} عامل مقاولين · {{ dsContractors }} مقاول · {{ dsProjects }} مشروع</span>
+      </div>
+      <table class="dt">
+        <thead><tr><th>كود العامل</th><th>الاسم</th><th>المهنة</th><th>رقم البطاقة</th><th>بدل المنطقة</th><th>الفئة</th><th>تاريخ التسجيل</th><th>أول يوم عمل</th><th>كود المقاول</th><th>اسم المقاول</th><th></th></tr></thead>
+        <tbody>
+          <sc-for list="{{ filteredWorkers }}" as="w" hint-placeholder-count="6">
+            <tr>
+              <td>{{ w.code }}</td>
+              <td style="cursor:pointer" onClick="{{ w.selectHandler }}">{{ w.name }}</td>
+              <td>{{ w.profession }}</td>
+              <td>{{ w.card }}</td>
+              <td>{{ w.allowance }}</td>
+              <td>
+                <select class="input" style="padding:2px 6px;font-size:13px;min-width:64px" value="{{ w.category }}" onChange="{{ w.categoryHandler }}">
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="E">E</option>
+                </select>
+              </td>
+              <td>{{ w.regDate }}</td>
+              <td>{{ w.startDate }}</td>
+              <td>{{ w.contractor }}</td>
+              <td>{{ w.contractorName }}</td>
+              <td><button class="btn btn-ghost" title="حذف العامل" style="padding:2px 8px;color:var(--color-accent-2-700)" onClick="{{ w.deleteHandler }}">✕</button></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <div style="display:flex;justify-content:center;align-items:center;gap:var(--space-3);margin-top:var(--space-3)">
+        <button class="btn btn-ghost btn-icon" title="الصفحة الأولى" onClick="{{ gotoWorkerFirst }}">⏮</button>
+        <button class="btn btn-ghost btn-icon" onClick="{{ gotoWorkerPrev }}">◄</button>
+        <span style="font-size:13px;color:var(--color-neutral-600)">صفحة {{ workerPageLabel }}</span>
+        <button class="btn btn-ghost btn-icon" onClick="{{ gotoWorkerNext }}">►</button>
+        <button class="btn btn-ghost btn-icon" title="الصفحة الأخيرة" onClick="{{ gotoWorkerLast }}">⏭</button>
+      </div>
+      <sc-if value="{{ hasSelectedWorker }}" hint-placeholder-val="{{ false }}">
+        <div class="card elev-md" style="margin-top:var(--space-4)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div class="card-title">ملف العامل: {{ selectedWorker.name }} ({{ selectedWorker.code }})</div>
+            <button class="btn btn-ghost" onClick="{{ clearWorker }}">إغلاق ✕</button>
+          </div>
+          <p style="font-size:13px;color:var(--color-neutral-600)">المهنة: {{ selectedWorker.profession }} — رقم البطاقة: {{ selectedWorker.card }}</p>
+          <div style="font-size:13px;font-weight:600;margin:var(--space-2) 0">آخر حركات الحضور</div>
+          <table class="dt">
+            <thead><tr><th>التاريخ</th><th>الوقت</th><th>النوع</th></tr></thead>
+            <tbody>
+              <sc-for list="{{ selectedWorker.logs }}" as="l" hint-placeholder-count="2">
+                <tr><td>{{ l.date }}</td><td>{{ l.time }}</td><td><span class="tag {{ l.type === 'In' ? 'tag-accent' : 'tag-accent-2' }}">{{ l.typeLabel }}</span></td></tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{ isContractors }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">إضافة/عرض عمال المقاول</h1>
+
+      <div class="card elev-sm" style="margin-bottom:var(--space-4)">
+        <div class="card-title" style="margin-bottom:var(--space-3)">إضافة مقاول جديد</div>
+        <div style="display:grid;grid-template-columns:1fr 2fr 1fr 1fr auto;gap:var(--space-3);align-items:end">
+          <div class="field"><label>كود المقاول</label><input class="input" placeholder="14710080" value="{{ newContractorCode }}" onChange="{{ onNewContractorCode }}"/></div>
+          <div class="field"><label>اسم المقاول</label><input class="input" placeholder="اسم المقاول" value="{{ newContractorName }}" onChange="{{ onNewContractorName }}"/></div>
+          <div class="field">
+            <label>نوع الأعمال</label>
+            <select class="input" value="{{ newContractorType }}" onChange="{{ onNewContractorType }}">
+              <option value="عمالة ذاتى">عمالة ذاتى</option>
+              <option value="عمالة باطن">عمالة باطن</option>
+            </select>
+          </div>
+          <div class="field"><label>تاريخ التسجيل</label><input class="input date-input" type="date" lang="en-GB" dir="ltr" value="{{ newContractorDateIso }}" onChange="{{ onNewContractorDate }}"/></div>
+          <button class="btn btn-primary" onClick="{{ addContractor }}">+ إضافة</button>
+        </div>
+      </div>
+
+      <div class="card elev-sm" style="margin-bottom:var(--space-5)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-3)">
+          <div style="display:flex;gap:var(--space-3);align-items:center;flex:1">
+            <span style="font-size:13px;color:var(--color-neutral-600);white-space:nowrap">سجل {{ contractorPos }}</span>
+            <select class="input" style="max-width:420px" value="{{ contractorPickValue }}" onChange="{{ onPickContractor }}">
+              <sc-for list="{{ contractorOptions }}" as="o" hint-placeholder-count="4">
+                <option value="{{ o.i }}">{{ o.label }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-ghost btn-icon" onClick="{{ gotoContractorPrev }}">◄</button>
+            <button class="btn btn-ghost btn-icon" onClick="{{ gotoContractorNext }}">►</button>
+            <button class="btn btn-secondary" disabled="{{ !canDeleteContractor }}" onClick="{{ deleteContractor }}">🗑 حذف المقاول</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:var(--space-4)">
+          <div class="field"><label>كود المقاول</label><input class="input" value="{{ contractor.code }}" readOnly="{{ true }}"/></div>
+          <div class="field"><label>اسم المقاول</label><input class="input" value="{{ contractor.name }}" readOnly="{{ true }}"/></div>
+          <div class="field"><label>نوع الأعمال</label><input class="input" value="{{ contractor.type }}" readOnly="{{ true }}"/></div>
+          <div class="field"><label>تاريخ التسجيل</label><input class="input" value="{{ contractor.regDate }}" readOnly="{{ true }}"/></div>
+        </div>
+        <div style="margin-top:var(--space-3)">
+          <span class="tag {{ contractor.active ? 'tag-accent' : 'tag-accent-2' }}">{{ contractor.statusLabel }}</span>
+          <span class="tag tag-neutral" style="margin-inline-start:8px">عدد العمال: {{ contractorWorkerCount }}</span>
+          <span class="tag tag-neutral" style="margin-inline-start:8px">المشروع: {{ contractor.projectName }}</span>
+        </div>
+      </div>
+      <div class="card-title" style="margin-bottom:var(--space-2)">بيانات عمال هذا المقاول</div>
+      <table class="dt">
+        <thead><tr><th>كود العامل</th><th>اسم العامل</th><th>رقم البطاقة</th><th>المهنة الافتراضية</th><th>تاريخ التسجيل</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ contractorWorkers }}" as="w" hint-placeholder-count="6">
+            <tr style="cursor:pointer" onClick="{{ w.selectHandler }}"><td>{{ w.code }}</td><td>{{ w.name }}</td><td>{{ w.card }}</td><td>{{ w.profession }}</td><td>17/07/2022</td></tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <sc-if value="{{ hasSelectedWorker }}" hint-placeholder-val="{{ false }}">
+        <div class="card elev-md" style="margin-top:var(--space-4)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div class="card-title">ملف العامل: {{ selectedWorker.name }} ({{ selectedWorker.code }})</div>
+            <button class="btn btn-ghost" onClick="{{ clearWorker }}">إغلاق ✕</button>
+          </div>
+          <p style="font-size:13px;color:var(--color-neutral-600)">المهنة: {{ selectedWorker.profession }} — رقم البطاقة: {{ selectedWorker.card }}</p>
+          <div style="font-size:13px;font-weight:600;margin:var(--space-2) 0">آخر حركات الحضور</div>
+          <table class="dt">
+            <thead><tr><th>التاريخ</th><th>الوقت</th><th>النوع</th></tr></thead>
+            <tbody>
+              <sc-for list="{{ selectedWorker.logs }}" as="l" hint-placeholder-count="2">
+                <tr><td>{{ l.date }}</td><td>{{ l.time }}</td><td><span class="tag {{ l.type === 'In' ? 'tag-accent' : 'tag-accent-2' }}">{{ l.typeLabel }}</span></td></tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{ isProfessions }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">المهن وفئات الأجر</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-4)">تعريف المهن وفئاتها التسعيرية للساعة العادية والإضافية والخصم</p>
+      <div class="card elev-sm" style="margin-bottom:var(--space-4)">
+        <div class="card-title" style="margin-bottom:var(--space-3)">إضافة وظيفة جديدة</div>
+        <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:var(--space-3);align-items:end">
+          <div class="field"><label>اسم الوظيفة</label>
+            <select class="input" value="{{ newProfName }}" onChange="{{ onNewProfName }}">
+              <option value="">اختر وظيفة من قائمة السراكي المعتمدة</option>
+              <sc-for list="{{ availableProfessionTitles }}" as="t" hint-placeholder-count="5">
+                <option value="{{ t }}">{{ t }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div class="field">
+            <label>الفئة</label>
+            <select class="input" value="{{ newProfCategory }}" onChange="{{ onNewProfCategory }}">
+              <option value="A">A — إشراف</option>
+              <option value="B">B — فني/صنايعي</option>
+              <option value="C">C — مساعد</option>
+              <option value="D">D — عمالة عادية</option>
+              <option value="E">E — تحت التدريب</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onClick="{{ addProfession }}">+ إضافة</button>
+        </div>
+      </div>
+      <div class="card elev-sm" style="margin-bottom:var(--space-4)">
+        <div class="card-title" style="margin-bottom:var(--space-1)">قيم الفئات وبدل المنطقة</div>
+        <div class="card-meta" style="margin-bottom:var(--space-3)">أدخل قيمة ساعة العمل لكل فئة وبدل المنطقة اليومي المستحق لها — تُطبَّق على المهن والعمال المرتبطين بالفئة</div>
+        <table class="dt">
+          <thead><tr><th>الفئة</th><th>الوصف</th><th>قيمة الساعة (ج.م)</th><th>بدل المنطقة (ج.م/يوم)</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ categoryRates }}" as="c" hint-placeholder-count="5">
+              <tr>
+                <td><span class="tag tag-accent">{{ c.key }}</span></td>
+                <td>{{ c.label }}</td>
+                <td><input class="input" dir="ltr" style="padding:4px 8px;font-size:13px;max-width:110px" value="{{ c.rate }}" onChange="{{ c.onRate }}"/></td>
+                <td><input class="input" dir="ltr" style="padding:4px 8px;font-size:13px;max-width:110px" value="{{ c.allowance }}" onChange="{{ c.onAllowance }}"/></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+      <table class="dt">
+        <thead><tr><th>كود المهنة</th><th>المهنة</th><th>الفئة</th><th>سعر الساعة</th><th>سعر ساعة إضافي</th><th>سعر خصم الساعة</th><th>الحالة</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ professionsPage }}" as="p" hint-placeholder-count="15">
+            <tr>
+              <td>{{ p.code }}</td><td>{{ p.name }}</td><td>{{ p.category }}</td>
+              <td>{{ p.hourRate }} ج.م</td><td>{{ p.overtimeRate }} ج.م</td><td>{{ p.deductionRate }} ج.م</td>
+              <td><span class="tag {{ p.stopped ? 'tag-accent-2' : 'tag-accent' }}">{{ p.statusLabel }}</span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <div style="display:flex;justify-content:center;align-items:center;gap:var(--space-3);margin-top:var(--space-3)">
+        <button class="btn btn-ghost btn-icon" onClick="{{ gotoProfPrev }}">◄</button>
+        <span style="font-size:13px;color:var(--color-neutral-600)">صفحة {{ profPageLabel }}</span>
+        <button class="btn btn-ghost btn-icon" onClick="{{ gotoProfNext }}">►</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isShifts }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">تعريف الورديات</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-4)">نماذج بداية/نهاية العمل ومدة الراحة المستخدمة في السراكي</p>
+      <table class="dt">
+        <thead><tr><th>كود الوقت</th><th>بداية العمل</th><th>نهاية العمل</th><th>مدة الراحة (ساعة)</th><th>عدد ساعات العمل</th><th>حساب الساعات كاملة</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ shifts }}" as="sh" hint-placeholder-count="3">
+            <tr>
+              <td>{{ sh.code }}</td><td>{{ sh.start }}</td><td>{{ sh.end }}</td><td>{{ sh.breakHours }}</td><td>{{ sh.hours }}</td>
+              <td><span class="tag {{ sh.full ? 'tag-accent' : 'tag-outline' }}">{{ sh.fullLabel }}</span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </sc-if>
+
+    <sc-if value="{{ isAttendanceLog }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">سجل دخول وخروج العمال</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-4)">كل حركة مسح فعلية — مصدر الحقيقة الزمنية لمطابقة السراكي · {{ ov.logSource }}</p>
+      <div class="toolbar">
+        <div class="field" style="min-width:220px"><label>بحث بالكود أو اسم العامل</label><input class="input" placeholder="14710001 أو اسم العامل" value="{{ logSearch }}" onChange="{{ onLogSearch }}"/></div>
+        <div class="field" style="min-width:180px">
+          <label>الموقع / القسم</label>
+          <select class="input" value="{{ logDept }}" onChange="{{ onLogDept }}">
+            <option value="all">كل الأقسام والمواقع</option>
+            <sc-for list="{{ deptOptions }}" as="d" hint-placeholder-count="4">
+              <option value="{{ d }}">{{ d }}</option>
+            </sc-for>
+          </select>
+        </div>
+        <div class="field" style="min-width:160px">
+          <label>التاريخ</label>
+          <select class="input" value="{{ logDate }}" onChange="{{ onLogDate }}">
+            <option value="all">كل الأيام</option>
+            <sc-for list="{{ logDateOptions }}" as="d" hint-placeholder-count="4">
+              <option value="{{ d }}">{{ d }}</option>
+            </sc-for>
+          </select>
+        </div>
+        <div class="field" style="min-width:150px">
+          <label>نوع الحركة</label>
+          <select class="input" value="{{ logType }}" onChange="{{ onLogType }}">
+            <option value="all">الكل</option>
+            <option value="In">دخول</option>
+            <option value="Out">خروج</option>
+          </select>
+        </div>
+      </div>
+      <table class="dt">
+        <thead><tr><th>مسلسل</th><th>كود العامل</th><th>الاسم</th><th>القسم/الموقع</th><th>التاريخ</th><th>الوقت</th><th>نوع الحركة</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ attendanceLogPage }}" as="l" hint-placeholder-count="5">
+            <tr><td>{{ l.id }}</td><td>{{ l.code }}</td><td>{{ l.name }}</td><td>{{ l.dept }}</td><td>{{ l.date }}</td><td>{{ l.time }}</td>
+              <td><span class="tag {{ l.type === 'In' ? 'tag-accent' : 'tag-accent-2' }}">{{ l.typeLabel }}</span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <div style="display:flex;justify-content:center;align-items:center;gap:var(--space-3);margin-top:var(--space-3)">
+        <button class="btn btn-ghost btn-icon" onClick="{{ gotoLogPrev }}">◄</button>
+        <span style="font-size:13px;color:var(--color-neutral-600)">صفحة {{ logPageLabel }}</span>
+        <button class="btn btn-ghost btn-icon" onClick="{{ gotoLogNext }}">►</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isScan }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">تسجيل الحضور — مراقب الموقع</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-5)">مسح باركود/QR العامل عند الدخول والخروج في مواقع الشركة</p>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:var(--space-6);align-items:flex-start">
+        <div class="phone">
+          <div class="phone-screen">
+            <div style="font-size:13px;color:var(--color-neutral-600);text-align:center">{{ nowLabel }}</div>
+            <div class="scan-target">{{ scanHint }}</div>
+            <button class="btn btn-primary btn-block" onClick="{{ doScan }}">مسح باركود عامل</button>
+            <div class="field">
+              <label>أو أدخل كود العامل يدويًا</label>
+              <input class="input" placeholder="14710001" value="{{ manualCode }}" onChange="{{ onManualChange }}"/>
+            </div>
+            <button class="btn btn-secondary btn-block" onClick="{{ doManualScan }}">تسجيل يدوي</button>
+          </div>
+        </div>
+        <div class="card elev-sm">
+          <div class="card-title" style="margin-bottom:var(--space-2)">سجل حركات اليوم</div>
+          <table class="dt">
+            <thead><tr><th>كود العامل</th><th>الاسم</th><th>الوقت</th><th>النوع</th></tr></thead>
+            <tbody>
+              <sc-for list="{{ scanLog }}" as="s" hint-placeholder-count="4">
+                <tr>
+                  <td>{{ s.code }}</td>
+                  <td>{{ s.name }}</td>
+                  <td>{{ s.time }}</td>
+                  <td><span class="tag {{ s.tagClass }}">{{ s.typeLabel }}</span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSarak }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">سجل السراكي اليومي والمطابقة</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-4)">مطابقة تلقائية بين بيان العمل المسجَّل وحركات الحضور الفعلية</p>
+      <div class="card elev-sm" style="margin-bottom:var(--space-4)">
+        <div class="card-title" style="margin-bottom:var(--space-3)">إضافة سرك جديد</div>
+        <div style="display:grid;grid-template-columns:1.3fr 1fr 1.4fr 1fr auto;gap:var(--space-3);align-items:end">
+          <div class="field"><label>العامل</label>
+            <select class="input" value="{{ newSarakWorker }}" onChange="{{ onNewSarakWorker }}">
+              <option value="">اختر عامل</option>
+              <sc-for list="{{ sarakWorkerOptions }}" as="w" hint-placeholder-count="6">
+                <option value="{{ w.code }}">{{ w.code }} — {{ w.name }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div class="field"><label>التاريخ</label>
+            <input class="input date-input" type="date" lang="en-GB" dir="ltr" min="{{ punchMinIso }}" max="{{ punchMaxIso }}" value="{{ newSarakDateIso }}" onChange="{{ onNewSarakDate }}"/>
+          </div>
+          <div class="field"><label>بيان العمل</label><input class="input" placeholder="مثال: صيانة المعدات" value="{{ newSarakWork }}" onChange="{{ onNewSarakWork }}"/></div>
+          <div class="field"><label>الوردية</label>
+            <select class="input" value="{{ newSarakShift }}" onChange="{{ onNewSarakShift }}">
+              <sc-for list="{{ shifts }}" as="sh" hint-placeholder-count="2">
+                <option value="{{ sh.code }}">{{ sh.code }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <button class="btn btn-primary" onClick="{{ addSarak }}">+ إضافة</button>
+        </div>
+      </div>
+      <table class="dt">
+        <thead><tr><th>كود السرك</th><th>التاريخ</th><th>العامل</th><th>المهنة</th><th>بيان العمل</th><th>الوردية</th><th>دخول فعلي</th><th>خروج فعلي</th><th>ساعات</th><th>حالة المطابقة</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ sarakPage }}" as="s" hint-placeholder-count="6">
+            <tr>
+              <td>{{ s.code }}</td>
+              <td>{{ s.date }}</td>
+              <td>{{ s.workerName }}</td>
+              <td>{{ s.profession }}</td>
+              <td>{{ s.work }}</td>
+              <td>{{ s.shift }}</td>
+              <td>{{ s.inTime }}</td>
+              <td>{{ s.outTime }}</td>
+              <td>{{ s.hours }}</td>
+              <td><span class="tag {{ s.statusClass }}">{{ s.status }}</span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </sc-if>
+
+    <sc-if value="{{ isAlerts }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">التنبيهات والاستثناءات</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-4)">حالات تحتاج مراجعة مشرف قبل ترحيلها للأجور</p>
+      <sc-for list="{{ allAlerts }}" as="a" hint-placeholder-count="5">
+        <div class="card elev-sm" style="margin-bottom:var(--space-3);display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <span class="tag {{ a.tagClass }}">{{ a.level }}</span>
+            <div>
+              <div style="font-size:15px">{{ a.text }}</div>
+              <div style="font-size:12px;color:var(--color-neutral-600)">{{ a.time }} · {{ a.workerCode }}</div>
+            </div>
+          </div>
+          <button class="btn btn-secondary">مراجعة</button>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ isUpload }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">رفع بيانات وملفات</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-4)">رفع جداول إكسل/CSV (عمال، سراكي، حضور وانصراف، مهن) وربطها بجزء السيستم المناسب لتحديث بياناته</p>
+      <div class="card elev-sm" style="margin-bottom:var(--space-4)">
+        <div class="card-title" style="margin-bottom:var(--space-3)">رفع جدول جديد</div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr auto;gap:var(--space-3);align-items:end">
+          <div class="field"><label>الملف</label><input class="input" type="file" accept=".xlsx,.xls,.csv" onChange="{{ onUploadFile }}"/></div>
+          <div class="field">
+            <label>ربط البيانات بـ</label>
+            <select class="input" value="{{ newUploadTarget }}" onChange="{{ onNewUploadTarget }}">
+              <option value="workers">العمال</option>
+              <option value="sarak">السراكي</option>
+              <option value="attendance">الحضور والانصراف</option>
+              <option value="professions">المهن وفئات الأجر</option>
+              <option value="contractors">المقاولون</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onClick="{{ addUpload }}">رفع وربط</button>
+        </div>
+      </div>
+      <table class="dt">
+        <thead><tr><th>اسم الملف</th><th>مرتبط بـ</th><th>تاريخ الرفع</th><th>الحالة</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ uploadedFiles }}" as="f" hint-placeholder-count="3">
+            <tr><td>{{ f.name }}</td><td>{{ f.targetLabel }}</td><td>{{ f.date }}</td><td><span class="tag tag-accent">مرتبط</span></td></tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </sc-if>
+
+    <sc-if value="{{ isProjectSheet }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">نموذج بيانات المشروع</h1>
+      <p style="color:var(--color-neutral-600);margin-bottom:var(--space-4)">يُغذَّى آليًا من سجلات العمال — بديل مباشر لملف الإكسل اليدوي، وقابل للتصدير بنفس الأعمدة</p>
+      <div class="toolbar">
+        <span class="tag tag-accent">{{ scopeLabel }}</span>
+        <button class="btn btn-primary" style="margin-inline-start:auto">تصدير Excel</button>
+      </div>
+      <table class="dt">
+        <thead><tr><th>م</th><th>الكود</th><th>الاسم</th><th>رقم البطاقة</th><th>المهنة</th><th>الإدارة/القسم</th><th>الفئة الحالية</th><th>البدل</th><th>اجمالى اليوميات</th><th>المشروع</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ workers }}" as="w" hint-placeholder-count="8">
+            <tr>
+              <td>{{ $index }}</td><td>{{ w.code }}</td><td>{{ w.name }}</td><td>{{ w.card }}</td><td>{{ w.profession }}</td>
+              <td>{{ w.dept }}</td><td>{{ w.category }}</td><td>{{ w.allowance }}</td><td>{{ w.dailyTotal }}</td><td>{{ w.project }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </sc-if>
+
+    <sc-if value="{{ isReports }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">التقارير وتصدير البيانات</h1>
+      <div class="toolbar">
+        <button class="btn btn-primary">تصدير Excel</button>
+        <button class="btn btn-secondary">تصدير PDF</button>
+        <button class="btn btn-ghost">اتصال Power Query</button>
+      </div>
+      <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+        <sc-for list="{{ reportKpis }}" as="k" hint-placeholder-count="3">
+          <div class="card elev-sm">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-2)">
+              <div>
+                <div class="card-kicker">{{ k.label }}</div>
+                <div style="font-size:11px;color:var(--color-neutral-500);letter-spacing:.04em">{{ k.code }}</div>
+              </div>
+              <button class="btn btn-ghost" title="حذف المؤشر" style="padding:2px 8px;font-size:15px;line-height:1;color:var(--color-accent-2-700)" onClick="{{ k.deleteHandler }}">✕</button>
+            </div>
+            <div class="kpi-num">{{ k.value }}</div>
+            <div class="card-meta">{{ k.meta }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="card elev-sm">
+        <div class="card-title" style="margin-bottom:var(--space-3)">بطاقة الأداء المتوازن — لمحة</div>
+        <table class="dt">
+          <thead><tr><th>المحور</th><th>المؤشر</th><th>الهدف</th><th>الفعلي</th></tr></thead>
+          <tbody>
+            <tr><td>مالي</td><td>تكلفة العمالة/الموازنة</td><td>≤ 100%</td><td>97%</td></tr>
+            <tr><td>عمليات</td><td>زمن المطابقة الآلية</td><td>&lt; 1 يوم</td><td>0.4 يوم</td></tr>
+            <tr><td>مقاولون</td><td>التزام الحضور</td><td>≥ 95%</td><td>91%</td></tr>
+            <tr><td>نمو</td><td>تبني القراء الرقمي</td><td>100% مواقع</td><td>68%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isUsers }}" hint-placeholder-val="{{ false }}">
+      <h1 style="font-size:26px">المستخدمون والصلاحيات</h1>
+      <div class="toolbar">
+        <div class="segwrap">
+          <button class="{{ roleAdminClass }}" onClick="{{ roleHandlers.admin }}">إدارة عليا</button>
+          <button class="{{ roleSupClass }}" onClick="{{ roleHandlers.sup }}">إشراف</button>
+          <button class="{{ roleEntryClass }}" onClick="{{ roleHandlers.entry }}">إدخال بيانات</button>
+        </div>
+      </div>
+      <div class="card elev-sm" style="margin-bottom:var(--space-4)">
+        <div class="card-title">صلاحيات: {{ roleView }}</div>
+        <div class="card-body">{{ roleDescription }}</div>
+      </div>
+
+      <div class="card elev-sm" style="margin-bottom:var(--space-4)">
+        <div class="card-title" style="margin-bottom:var(--space-3)">إضافة مستخدم جديد</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:var(--space-3);align-items:end">
+          <div class="field"><label>الاسم</label><input class="input" placeholder="اسم المستخدم" value="{{ newUserName }}" onChange="{{ onNewUserName }}"/></div>
+          <div class="field">
+            <label>الدور</label>
+            <select class="input" value="{{ newUserRole }}" onChange="{{ onNewUserRole }}">
+              <option value="إدارة عليا">إدارة عليا</option>
+              <option value="إشراف">إشراف</option>
+              <option value="إدخال بيانات">إدخال بيانات</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>المشروع (النطاق)</label>
+            <select class="input" value="{{ newUserProject }}" onChange="{{ onNewUserProject }}">
+              <sc-for list="{{ projects }}" as="pr" hint-placeholder-count="3">
+                <option value="{{ pr.code }}">{{ pr.code }} — {{ pr.name }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <button class="btn btn-primary" onClick="{{ addUser }}">+ إضافة</button>
+        </div>
+        <p style="font-size:12px;color:var(--color-neutral-600);margin-top:var(--space-2)">دور "إشراف" أو "إدخال بيانات" يقيّد المستخدم بالمشروع المختار فقط — إضافة وتعديل ومراقبة بيانات هذا المشروع دون غيره. "إدارة عليا" وحدها تصل لكل المشاريع.</p>
+      </div>
+
+      <table class="dt">
+        <thead><tr><th>المستخدم</th><th>الدور</th><th>النطاق</th><th>الحالة</th><th></th></tr></thead>
+        <tbody>
+          <sc-for list="{{ users }}" as="u" hint-placeholder-count="4">
+            <tr>
+              <td>{{ u.name }}</td>
+              <td><span class="tag tag-accent">{{ u.role }}</span></td>
+              <td>{{ u.scope }}</td>
+              <td>نشط</td>
+              <td><button class="btn btn-ghost btn-icon" title="حذف" onClick="{{ u.deleteHandler }}">✕</button></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </sc-if>
+
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    screen: 'dashboard',
+    workerSearch: '',
+    manualCode: '',
+    scanLog: [
+      { code: '14710001', name: 'مؤمن عبدالقادر عبدالجليل', time: '08:25', type: 'in' },
+      { code: '14710009', name: 'أحمد طه محمد', time: '09:01', type: 'in' },
+      { code: '14710004', name: 'محمد حسن أحمد حسن', time: '17:05', type: 'out' },
+    ],
+    roleView: 'إدارة عليا',
+    contractorIndex: 0,
+    contractors: [
+      { code: '14710000', name: 'ذاتى مخزن بدر', type: 'عمالة ذاتى', active: true, regDate: '17/07/2022' },
+      { code: '14710050', name: 'مقاول باطن — الأمين للمقاولات', type: 'عمالة باطن', active: true, regDate: '02/03/2023' },
+      { code: '14710070', name: 'مقاول باطن — النصر للتوريدات', type: 'عمالة باطن', active: false, regDate: '11/09/2024' },
+    ],
+    newContractorCode: '', newContractorName: '', newContractorType: 'عمالة باطن', newContractorDate: '',
+    selectedWorkerCode: null,
+    profPage: 0,
+    logDate: 'all',
+    logPage: 0,
+    addedProfessions: [],
+    newProfName: '', newProfCategory: 'B',
+    catRates: {
+      A: { label: 'إشراف', rate: '32', allowance: '30' },
+      B: { label: 'فني/صنايعي', rate: '22', allowance: '20' },
+      C: { label: 'مساعد', rate: '16', allowance: '15' },
+      D: { label: 'عمالة عادية', rate: '14', allowance: '10' },
+      E: { label: 'تحت التدريب', rate: '11', allowance: '0' },
+    },
+    addedSaraks: [],
+    newSarakWorker: '', newSarakDate: '', newSarakWork: '', newSarakShift: '8To17G',
+    uploadedFiles: [],
+    newUploadName: '', newUploadTarget: 'workers',
+    logSearch: '', logDept: 'all', logType: 'all',
+    hiddenKpis: [],
+    showWorkerForm: false,
+    workerRev: 0,
+    nw: { name: '', code: '', profession: '', card: '', allowance: '0', category: 'B', regDate: '', startDate: '', contractor: '14710000' },
+    users: [
+      { name: 'أحمد نجم', role: 'إدارة عليا', scope: 'كل المشاريع والمقاولين' },
+      { name: 'مشرف موقع — بدر', role: 'إشراف', scope: 'مشروع 147 فقط' },
+      { name: 'it10', role: 'إدخال بيانات', scope: 'مراقب موقع — مشروع 147' },
+      { name: 'it11', role: 'إدخال بيانات', scope: 'مراقب موقع — مشروع 147' },
+    ],
+    newUserName: '', newUserRole: 'إدخال بيانات', newUserProject: '147',
+  };
+  PAGE_SIZE = 5;
+  PROF_PAGE_SIZE = 15;
+  WORKER_VIEW_LIMIT = 60;
+
+  componentDidMount() { this.loadRealData(); }
+
+  async loadRealData() {
+    let d;
+    try { d = await (await fetch('data/eadrs-data.json')).json(); } catch (e) { return; }
+    const projName = {}; d.projects.forEach(p => { projName[p.code] = p.name; });
+
+    // المهن من ملف "العمالة الذاتى" (ورقة المهن) — كود المهنة + الإدارة
+    this.professionsData = d.professions.map((j, i) => {
+      const isSup = j.name.includes('مشرف') || j.name.includes('رئيس') || j.name.includes('مراقب');
+      const isHelper = j.name.includes('مساعد') || j.name.startsWith('عامل');
+      const category = isSup ? 'A' : (isHelper ? 'C' : 'B');
+      const hourRate = isSup ? 32 : (isHelper ? 16 : 22);
+      return { code: j.code || String(200 + i), name: j.name, dept: j.dept || 'غير محدد', category,
+        hourRate, overtimeRate: Math.round(hourRate * 125) / 100, deductionRate: Math.round(hourRate * 125) / 100, stopped: false };
+    });
+    this.sarakJobTitles = this.professionsData.map(p => p.name);
+    const catOf = {}; this.professionsData.forEach(p => { catOf[p.name] = p.category; });
+
+    this.projectsData = d.projects.map(p => ({ code: p.code, name: p.name }));
+
+    const SELF = 'SELF';
+    const selfW = d.selfWorkers.map(r => ({
+      code: r[0], name: r[1], card: r[2], profession: r[3], dept: (r[4] || 'غير محدد').trim(),
+      project: r[5], manager: r[6], startDate: r[7], regDate: r[7],
+      contractor: SELF, source: 'ذاتى', category: catOf[r[3]] || 'B', allowance: 0, dailyTotal: 0,
+    }));
+    const conW = d.contractorWorkers.map(r => ({
+      code: r[0], name: r[1], card: r[2], profession: r[3] || 'عامل', dept: 'عمالة مقاولين',
+      project: r[5], contractor: r[4], source: 'باطن', category: catOf[r[3]] || 'C', allowance: 0, dailyTotal: 0,
+    }));
+    this.workers = selfW.concat(conW).slice(0, 1500);
+
+    this.state.contractors = [{ code: SELF, name: 'العمالة الذاتية — الشروق', type: 'عمالة ذاتى', active: true, regDate: '—', project: '', count: selfW.length }]
+      .concat(d.contractors.map(c => ({ code: c.code, name: c.name, type: 'عمالة باطن', active: true,
+        regDate: '—', project: c.project, projectName: projName[c.project] || '—', count: c.count })));
+
+    if (d.attendance && d.attendance.rows && d.attendance.rows.length) {
+      let id = 30000;
+      this.attendanceLogData = d.attendance.rows.slice(0, 3000).map(r => ({ id: id++, code: r[0], date: r[1], time: r[2], type: r[3] }));
+      this.attendanceDates = d.attendance.dates;
+      this.attendanceSource = 'سجل بصمة فعلي — ' + d.attendance.rows.length.toLocaleString('en-US') + ' حركة · ' +
+        d.attendance.dates.length + ' يوم (' + d.attendance.dates[0] + ' – ' + d.attendance.dates[d.attendance.dates.length - 1] + ')';
+    } else {
+      this.attendanceLogData = this.buildAttendance(this.workers);
+      this.attendanceSource = 'سجل تشغيلي مولَّد — لم يُرفع ملف بصمة';
+    }
+    this._codeToWorker = null; this._dashCacheKey = null; this._byContractor = null;
+    this._logKey = null; this._wmKey = null; this._profBars = null; this._enrolledWorkers = null;
+    window.__t = Math.round(performance.now());
+    if (/noset/.test(location.search)) return;
+    this.setState({ workerRev: this.state.workerRev + 1, dataLoaded: true, datasetInfo: {
+      projects: this.projectsData.length, professions: this.professionsData.length,
+      contractors: this.state.contractors.length, self: selfW.length, sub: conW.length, total: this.workers.length,
+    } });
+  }
+
+  // سجل حضور تشغيلي مولَّد من العمالة الفعلية (٥ أيام) لحين ربط أجهزة البصمة
+  buildAttendance(workers) {
+    const out = []; let id = 30000;
+    const days = [];
+    for (let i = 2; i >= 0; i--) { const dt = new Date(2026, 7, 26 - i); days.push(dt.toLocaleDateString('en-GB')); }
+    days.forEach((date, di) => {
+      const isToday = di === days.length - 1;
+      workers.forEach((w, wi) => {
+        if (!isToday && wi % 4 !== 0) return; // الأيام السابقة بعينة أخف
+        const h = (wi * 17 + di * 41) % 100;
+        if (h < 11) return; // غياب ~11%
+        const inM = 7 * 60 + 30 + ((wi * 3 + di) % 35);
+        out.push({ id: id++, code: w.code, date, time: this.hm(inM), type: 'In' });
+        if (h >= 15) out.push({ id: id++, code: w.code, date, time: this.hm(17 * 60 + ((wi * 5) % 30)), type: 'Out' });
+      });
+    });
+    return out;
+  }
+  hm(m) { return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+
+  addProfession() {
+    const s = this.state;
+    if (!s.newProfName.trim()) return;
+    const cr = s.catRates[s.newProfCategory] || {};
+    const hourRate = parseFloat(cr.rate) || 22.0;
+    const prof = {
+      code: String(300 + s.addedProfessions.length), name: s.newProfName.trim(), category: s.newProfCategory,
+      hourRate, overtimeRate: Math.round(hourRate * 1.25 * 100) / 100, deductionRate: Math.round(hourRate * 1.25 * 100) / 100,
+      stopped: false,
+    };
+    this.setState({ addedProfessions: [...s.addedProfessions, prof], newProfName: '' });
+  }
+
+  workers = [
+    { code: '14710001', name: 'مؤمن عبدالقادر مصطفى عبدالجليل', card: '29208242401491', profession: 'عامل مخزن', contractor: '14710000', dept: 'المخازن', category: 'A', allowance: 0, dailyTotal: 180.0, project: '147' },
+    { code: '14710002', name: 'محمد رمضان رمضان محمود', card: '29407252302354', profession: 'عامل مخزن', contractor: '14710000', dept: 'المخازن', category: 'A', allowance: 0, dailyTotal: 180.0, project: '147' },
+    { code: '14710003', name: 'محمد فتحى عبدالعليم عاشور', card: '26703033300935', profession: 'عامل مخزن', contractor: '14710000', dept: 'المخازن', category: 'A', allowance: 0, dailyTotal: 180.0, project: '147' },
+    { code: '14710004', name: 'محمد حسن أحمد حسن', card: '29007152402019', profession: 'عامل مخزن', contractor: '14710000', dept: 'المخازن', category: 'A', allowance: 0, dailyTotal: 180.0, project: '147' },
+    { code: '14710009', name: 'أحمد طه محمد محمد', card: '27611222100071', profession: 'فى لحام', contractor: '14710000', dept: 'الصيانة', category: 'B', allowance: 20, dailyTotal: 220.0, project: '147' },
+    { code: '14710010', name: 'ابراهيم سيد فهيم', card: '28502200102674', profession: 'فى كهرباء سيارات', contractor: '14710000', dept: 'الصيانة', category: 'B', allowance: 20, dailyTotal: 220.0, project: '147' },
+    { code: '14710011', name: 'سامح اسماعيل عبدالسلام عبيد', card: '28701011820658', profession: 'فى معدات', contractor: '14710000', dept: 'المعدات', category: 'B', allowance: 15, dailyTotal: 210.0, project: '147' },
+    { code: '14710012', name: 'علاء ذكى سيد احمد', card: '26506150103397', profession: 'فى عمرات', contractor: '14710000', dept: 'العمرات', category: 'C', allowance: 25, dailyTotal: 270.0, project: '147' },
+    { code: '14710013', name: 'كرم مجدى صبحى موسى', card: '29406262301155', profession: 'فى معدات خفيفة C', contractor: '14710000', dept: 'المعدات', category: 'C', allowance: 15, dailyTotal: 230.0, project: '147' },
+    { code: '14710014', name: 'عامر احمد زكريا جرجاوى', card: '30403012411938', profession: 'عامل مخزن', contractor: '14710000', dept: 'المخازن', category: 'A', allowance: 0, dailyTotal: 180.0, project: '147' },
+  ];
+
+  analytics() {
+    const key = 'an|' + this.state.workerRev;
+    if (this._anKey === key) return this._an;
+    const logs = this.attendanceLogData;
+    const dates = this.attendanceDates || [...new Set(logs.map(l => l.date))];
+    if (!this._codeToWorker) { this._codeToWorker = {}; this.workers.forEach(w => { this._codeToWorker[w.code] = w; }); }
+    const known = this._codeToWorker;
+    const enrolled = new Set(logs.filter(l => known[l.code]).map(l => l.code));
+    const byDate = {};
+    dates.forEach(d => { byDate[d] = { date: d, present: new Set(), pairs: {}, late: 0, early: 0 }; });
+    const mins = (t) => { const p = String(t).split(':'); return (+p[0] || 0) * 60 + (+p[1] || 0); };
+    logs.forEach(l => {
+      const b = byDate[l.date]; if (!b || !known[l.code]) return;
+      const p = b.pairs[l.code] || (b.pairs[l.code] = { in: null, out: null });
+      if (l.type === 'In') { b.present.add(l.code); const m = mins(l.time); if (p.in === null || m < p.in) p.in = m; }
+      else { const m = mins(l.time); if (p.out === null || m > p.out) p.out = m; }
+    });
+    const N = enrolled.size || 1;
+    const wdNames = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+    const days = dates.map(d => {
+      const b = byDate[d];
+      const present = b.present.size;
+      let hrs = 0, cnt = 0, late = 0, incomplete = 0;
+      Object.values(b.pairs).forEach(p => {
+        if (p.in !== null && p.out !== null && p.out > p.in) { hrs += (p.out - p.in) / 60; cnt++; }
+        else if (p.in !== null) incomplete++;
+        if (p.in !== null && p.in > 8 * 60 + 15) late++;
+      });
+      const dm = d.split('/');
+      const jsd = new Date(+dm[2], +dm[1] - 1, +dm[0]);
+      return {
+        date: d, weekday: wdNames[jsd.getDay()], dow: jsd.getDay(),
+        present, absent: Math.max(0, N - present),
+        rate: Math.round((present / N) * 100),
+        avgHours: cnt ? (hrs / cnt).toFixed(1) : '—',
+        late, incomplete,
+      };
+    });
+    const maxPresent = Math.max(1, ...days.map(d => d.present));
+    const chart = days.map(d => ({ ...d,
+      h: Math.round((d.present / maxPresent) * 100),
+      barColor: d.rate >= 85 ? 'var(--color-accent)' : d.rate >= 65 ? 'var(--color-accent-700)' : 'var(--color-accent-2-700)',
+      dayLabel: d.date.slice(0, 2),
+    }));
+    const avgRate = days.length ? Math.round(days.reduce((a, d) => a + d.rate, 0) / days.length) : 0;
+    const avgPresent = days.length ? Math.round(days.reduce((a, d) => a + d.present, 0) / days.length) : 0;
+    const best = days.slice().sort((a, b) => b.present - a.present)[0] || {};
+    const worst = days.slice().sort((a, b) => a.present - b.present)[0] || {};
+    const wd = {};
+    days.forEach(d => { (wd[d.dow] = wd[d.dow] || { dow: d.dow, weekday: d.weekday, sum: 0, n: 0, late: 0 }); wd[d.dow].sum += d.present; wd[d.dow].n++; wd[d.dow].late += d.late; });
+    const weekdays = Object.values(wd).sort((a, b) => a.dow - b.dow).map(x => ({
+      weekday: x.weekday, avg: Math.round(x.sum / x.n), n: x.n,
+      rate: Math.round((x.sum / x.n / N) * 100), late: Math.round(x.late / x.n),
+      factor: avgPresent ? ((x.sum / x.n) / avgPresent).toFixed(2) : '1.00',
+    }));
+    // اتجاه خطي على آخر 7 أيام + معامل يوم الأسبوع
+    const tail = days.slice(-7);
+    let slope = 0;
+    if (tail.length > 1) {
+      const n = tail.length, mx = (n - 1) / 2, my = tail.reduce((a, d) => a + d.present, 0) / n;
+      let num = 0, den = 0;
+      tail.forEach((d, i) => { num += (i - mx) * (d.present - my); den += (i - mx) * (i - mx); });
+      slope = den ? num / den : 0;
+    }
+    const baseLast = tail.length ? tail[tail.length - 1].present : avgPresent;
+    const lastDate = dates[dates.length - 1];
+    const ld = lastDate ? lastDate.split('/') : ['01', '08', '2026'];
+    const forecast = [1, 2, 3, 4, 5].map(k => {
+      const dt = new Date(+ld[2], +ld[1] - 1, +ld[0] + k);
+      const wf = weekdays.find(w => w.weekday === wdNames[dt.getDay()]);
+      const f = wf ? parseFloat(wf.factor) : 1;
+      const raw = (baseLast + slope * k) * (0.35 + 0.65 * f);
+      const val = Math.max(0, Math.min(N, Math.round(raw)));
+      const conf = Math.max(55, 92 - k * 6 - (wf ? 0 : 10));
+      return {
+        date: ('0' + dt.getDate()).slice(-2) + '/' + ('0' + (dt.getMonth() + 1)).slice(-2) + '/' + dt.getFullYear(),
+        weekday: wdNames[dt.getDay()],
+        present: val.toLocaleString('en-US'),
+        absent: Math.max(0, N - val).toLocaleString('en-US'),
+        rate: Math.round((val / N) * 100) + '%',
+        conf: conf + '%',
+        h: Math.round((val / maxPresent) * 100),
+        tagClass: conf >= 80 ? 'tag-accent' : 'tag-outline',
+      };
+    });
+    const trendLabel = slope > 0.5 ? 'اتجاه صاعد' : slope < -0.5 ? 'اتجاه هابط' : 'مستقر';
+    const trendColor = slope < -0.5 ? 'var(--color-accent-2-700)' : 'var(--color-accent-700)';
+    // تحليل بحسب الدور والمشروع
+    const dash = this.dashboardAnalytics();
+    const roleAnalysis = dash.roleRows.map(r => ({
+      ...r,
+      countLabel: r.count.toLocaleString('en-US'),
+      rate: r.count ? Math.round((r.present / r.count) * 100) : 0,
+      absent: Math.max(0, r.count - r.present).toLocaleString('en-US'),
+    }));
+    const projectAnalysis = dash.projectRows.slice(0, 8).map(p => ({
+      ...p,
+      registeredLabel: p.registered.toLocaleString('en-US'),
+      absent: Math.max(0, (p.enrolled || 0) - p.present).toLocaleString('en-US'),
+    }));
+    const totalRisk = days.reduce((a, d) => a + d.incomplete, 0);
+    const out = {
+      an: {
+        totalForce: this.workers.length.toLocaleString('en-US'),
+        enrolled: N.toLocaleString('en-US'),
+        coverage: Math.round((N / Math.max(1, this.workers.length)) * 100) + '%',
+        avgPresent: avgPresent.toLocaleString('en-US'),
+        avgAbsent: Math.max(0, N - avgPresent).toLocaleString('en-US'),
+        avgRate: avgRate + '%',
+        absenceRate: (100 - avgRate) + '%',
+        dayCount: days.length,
+        period: days.length ? days[0].date + ' – ' + days[days.length - 1].date : '—',
+        bestLabel: (best.date || '—') + ' (' + (best.present || 0).toLocaleString('en-US') + ')',
+        worstLabel: (worst.date || '—') + ' (' + (worst.present || 0).toLocaleString('en-US') + ')',
+        avgLate: days.length ? Math.round(days.reduce((a, d) => a + d.late, 0) / days.length).toLocaleString('en-US') : '0',
+        incomplete: totalRisk.toLocaleString('en-US'),
+        trendLabel, trendColor,
+        slopeLabel: (slope >= 0 ? '+' : '') + slope.toFixed(1) + ' عامل/يوم',
+        nextDayLabel: forecast.length ? forecast[0].date + ' — ' + forecast[0].present + ' حاضر متوقع' : '—',
+      },
+      chart, weekdays, forecast, roleAnalysis, projectAnalysis,
+      dayRows: days.slice().reverse().map(d => ({ ...d,
+        presentLabel: d.present.toLocaleString('en-US'),
+        absentLabel: d.absent.toLocaleString('en-US'),
+        rateLabel: d.rate + '%',
+        tagClass: d.rate >= 85 ? 'tag-accent' : d.rate >= 65 ? 'tag-outline' : 'tag-accent-2',
+      })),
+    };
+    this._anKey = key; this._an = out;
+    return out;
+  }
+
+  setCatRate(key, field, value) {
+    this.setState(st => ({ catRates: { ...st.catRates, [key]: { ...st.catRates[key], [field]: value } } }));
+  }
+
+  toIso(dmy) {
+    if (!dmy) return '';
+    const m = String(dmy).match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (!m) return /^\d{4}-\d{2}-\d{2}$/.test(dmy) ? dmy : '';
+    return m[3] + '-' + m[2].padStart(2, '0') + '-' + m[1].padStart(2, '0');
+  }
+
+  toDmy(iso) {
+    if (!iso) return '';
+    const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    return m ? m[3] + '/' + m[2] + '/' + m[1] : iso;
+  }
+
+  sarakRecords = [
+    { code: '1576-1', date: '01/10/2025', workerCode: '14710009', workerName: 'أحمد طه محمد محمد', profession: 'فى لحام', work: 'اعمال حدادة ولحام', shift: '8To17G', status: 'مطابق', statusClass: 'tag-accent' },
+    { code: '1576-2', date: '01/10/2025', workerCode: '14710012', workerName: 'علاء ذكى سيد احمد', profession: 'فى عمرات', work: 'صيانة المعدات', shift: '8To17G', status: 'مطابق', statusClass: 'tag-accent' },
+    { code: '1577-1', date: '02/10/2025', workerCode: '14710083', workerName: 'عامل مخازن (14710083)', profession: 'عامل مخزن', work: 'اعمال المخازن', shift: '8To17G', status: 'معلّق مطابقة', statusClass: 'tag-outline' },
+    { code: '1578-1', date: '14/08/2026', workerCode: '14710004', workerName: 'محمد حسن أحمد حسن', profession: 'عامل مخزن', work: 'جرد مخزن رئيسي', shift: '8To17G', status: 'استثناء: فرق توقيت', statusClass: 'tag-accent-2' },
+  ];
+
+  allAlertsData = [
+    { level: 'عاجل', tagClass: 'tag-accent-2', text: 'عامل 14710033 مسجَّل دخول بدون خروم يوم 15/08 — لا يوجد تسجيل انصراف', time: 'اليوم 09:40', workerCode: '14710033' },
+    { level: 'متوسط', tagClass: 'tag-outline', text: 'ساعات إضافية لمهنة "فى معدات" تجاوزت الحد اليومي المسموح', time: 'اليوم 08:10', workerCode: '14710011' },
+    { level: 'معلومة', tagClass: 'tag-neutral', text: 'سرك 1577-1 بانتظار مطابقة تلقائية مع سجل الحضور', time: 'أمس 18:00', workerCode: '14710083' },
+  ];
+
+  projectsData = [
+    { code: '147', name: 'مخازن بدر' },
+    { code: '150', name: 'مشروع النصر' },
+    { code: '152', name: 'مشروع الأمل' },
+  ];
+
+  addSarak() {
+    const s = this.state;
+    if (!s.newSarakWorker || !s.newSarakDate.trim()) return;
+    const w = this.workers.find(x => x.code === s.newSarakWorker);
+    if (!w) return;
+    const logsForDay = this.attendanceLogData.filter(l => l.code === w.code && l.date === s.newSarakDate.trim());
+    const ins = logsForDay.filter(l => l.type === 'In').map(l => l.time).sort();
+    const outs = logsForDay.filter(l => l.type === 'Out').map(l => l.time).sort();
+    const hasIn = ins.length > 0, hasOut = outs.length > 0;
+    const mins = t => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
+    const worked = hasIn && hasOut ? Math.max(0, mins(outs[outs.length - 1]) - mins(ins[0])) : 0;
+    let status, statusClass;
+    if (hasIn && hasOut) {
+      if (worked < 6 * 60) { status = 'استثناء: ساعات ناقصة'; statusClass = 'tag-accent-2'; }
+      else { status = 'مطابق'; statusClass = 'tag-accent'; }
+    } else if (!hasIn && !hasOut) { status = 'بدون بصمة — غياب'; statusClass = 'tag-outline'; }
+    else { status = hasIn ? 'استثناء: بصمة خروج مفقودة' : 'استثناء: بصمة دخول مفقودة'; statusClass = 'tag-accent-2'; }
+    const rec = {
+      code: '1' + (600 + s.addedSaraks.length) + '-1', date: s.newSarakDate.trim(), workerCode: w.code, workerName: w.name,
+      profession: w.profession, work: s.newSarakWork.trim() || 'بيان عمل يومي', shift: s.newSarakShift, status, statusClass,
+      inTime: hasIn ? ins[0] : '—', outTime: hasOut ? outs[outs.length - 1] : '—',
+      hours: worked ? (Math.floor(worked / 60) + ':' + String(worked % 60).padStart(2, '0')) : '—',
+    };
+    this.setState({ addedSaraks: [...s.addedSaraks, rec], newSarakWorker: '', newSarakDate: '', newSarakWork: '' });
+  }
+
+  onUploadFile(e) {
+    const f = e.target.files && e.target.files[0];
+    if (f) this.setState({ newUploadName: f.name });
+  }
+  addUpload() {
+    const s = this.state;
+    if (!s.newUploadName.trim()) return;
+    const labels = { workers: 'العمال', sarak: 'السراكي', attendance: 'الحضور والانصراف', professions: 'المهن وفئات الأجر', contractors: 'المقاولون' };
+    const file = { name: s.newUploadName.trim(), target: s.newUploadTarget, targetLabel: labels[s.newUploadTarget], date: new Date().toLocaleDateString('en-GB') };
+    this.setState({ uploadedFiles: [file, ...s.uploadedFiles], newUploadName: '' });
+  }
+
+  onLogSearch(e) { this.setState({ logSearch: e.target.value, logPage: 0 }); }
+  onLogDept(e) { this.setState({ logDept: e.target.value, logPage: 0 }); }
+  onLogType(e) { this.setState({ logType: e.target.value, logPage: 0 }); }
+
+  deleteKpi(code) {
+    if (this.state.hiddenKpis.includes(code)) return;
+    this.setState({ hiddenKpis: [...this.state.hiddenKpis, code] });
+  }
+  restoreKpis() { this.setState({ hiddenKpis: [] }); }
+
+  toggleWorkerForm() { this.setState({ showWorkerForm: !this.state.showWorkerForm }); }
+  setNw(key, value) { this.setState({ nw: { ...this.state.nw, [key]: value } }); }
+  nextWorkerCode() {
+    const nums = this.workers.map(w => parseInt(w.code, 10)).filter(n => !isNaN(n));
+    return String(Math.max(...nums, 14710000) + 1);
+  }
+  addWorker() {
+    const nw = this.state.nw;
+    if (!nw.name.trim()) return;
+    const c = this.state.contractors.find(x => x.code === nw.contractor) || this.state.contractors[0];
+    const today = new Date().toLocaleDateString('en-GB');
+    this.workers.push({
+      code: (nw.code.trim() || this.nextWorkerCode()),
+      name: nw.name.trim(),
+      card: nw.card.trim() || '—',
+      profession: nw.profession || 'عامل',
+      contractor: c.code,
+      dept: 'غير محدد',
+      category: nw.category,
+      allowance: Number(nw.allowance) || 0,
+      dailyTotal: 0,
+      project: '147',
+      regDate: nw.regDate.trim() || today,
+      startDate: nw.startDate.trim() || today,
+    });
+    this._codeToWorker = null;
+    this.setState({
+      workerRev: this.state.workerRev + 1,
+      showWorkerForm: false,
+      nw: { name: '', code: '', profession: '', card: '', allowance: '0', category: 'B', regDate: '', startDate: '', contractor: c.code },
+    });
+  }
+  deleteWorker(code) {
+    const i = this.workers.findIndex(w => w.code === code);
+    if (i > -1) this.workers.splice(i, 1);
+    this._codeToWorker = null;
+    this.setState({ workerRev: this.state.workerRev + 1, selectedWorkerCode: null });
+  }
+  setWorkerCategory(code, category) {
+    const w = this.workers.find(x => x.code === code);
+    if (w) w.category = category;
+    this.setState({ workerRev: this.state.workerRev + 1 });
+  }
+
+  projectOf(code) { return String(code || '147').slice(0, 3); }
+  projectOfWorker(w) { return w.project || this.projectOf(w.contractor); }
+  roleOf(profession) {
+    const p = (profession || '').trim();
+    if (p.includes('مشرف')) return 'supervisor';
+    if (p.includes('مساعد')) return 'helper';
+    if (p.startsWith('فى') || p.startsWith('فن')) return 'technician';
+    return 'worker';
+  }
+  dashboardAnalytics() {
+    const key = this.state.workerRev + '|' + this.state.contractors.length + '|' + this.state.addedSaraks.length;
+    if (this._dashCacheKey === key) return this._dashCache;
+    const out = this.computeDashboard();
+    this._dashCacheKey = key;
+    this._dashCache = out;
+    return out;
+  }
+  computeDashboard() { console.log('CD start', Math.round(performance.now())); const __t=performance.now(); try { return this._cd(); } finally { console.log('CD ms', Math.round(performance.now()-__t)); } }
+  _cd() {
+    const logs = this.attendanceLogData;
+    const dates = this.attendanceDates || [...new Set(logs.map(l => l.date))];
+    const today = dates[dates.length - 1] || '01/10/2025';
+    const month = today.slice(3);
+    const presentTodaySet = new Set(logs.filter(l => l.date === today && l.type === 'In').map(l => l.code));
+    const presentMonthSet = new Set(logs.filter(l => l.date.slice(3) === month && l.type === 'In').map(l => l.code));
+    const enrolledSet = new Set(logs.map(l => l.code));
+    this._punchCodes = enrolledSet;
+    if (!this._codeToWorker) {
+      this._codeToWorker = {};
+      this.workers.forEach(w => { this._codeToWorker[w.code] = w; });
+    }
+    const known = this._codeToWorker;
+    const unlinkedPunches = [...enrolledSet].filter(c => !known[c]);
+    unlinkedPunches.forEach(c => enrolledSet.delete(c));
+
+    const totalRegistered = this.workers.length;
+    const projectMap = {};
+    this.projectsData.forEach(p => { projectMap[p.code] = { code: p.code, name: p.name, registered: 0, present: 0, contractors: 0 }; });
+    this.workers.forEach(w => {
+      const pc = this.projectOfWorker(w);
+      if (!projectMap[pc]) projectMap[pc] = { code: pc, name: 'مشروع ' + pc, registered: 0, present: 0, contractors: 0, enrolled: 0 };
+      projectMap[pc].registered++;
+      if (enrolledSet.has(w.code)) projectMap[pc].enrolled = (projectMap[pc].enrolled || 0) + 1;
+      if (presentTodaySet.has(w.code)) projectMap[pc].present++;
+    });
+    this.state.contractors.forEach(c => {
+      const pc = c.project || this.projectOf(c.code);
+      if (projectMap[pc]) projectMap[pc].contractors++;
+    });
+    const projectRows = Object.values(projectMap)
+      .filter(p => p.registered > 0 || p.contractors > 0)
+      .map(p => {
+        const base = p.enrolled || 0;
+        const pct = base ? Math.round((p.present / base) * 100) : 0;
+        return { ...p, pct, enrolled: base, pctLabel: base ? pct + '%' : 'لا بصمة',
+          barColor: pct >= 80 ? 'var(--color-accent)' : pct >= 50 ? 'var(--color-accent-700)' : 'var(--color-accent-2-700)' };
+      })
+      .sort((a, b) => (b.enrolled - a.enrolled) || (b.registered - a.registered));
+
+    const roleDefs = [
+      { key: 'supervisor', label: 'المشرفون', hint: 'مشرف موقع / مشرف وردية' },
+      { key: 'technician', label: 'الفنيون', hint: 'مهن فنية متخصصة' },
+      { key: 'helper', label: 'المساعدون', hint: 'مساعد فني' },
+      { key: 'worker', label: 'العمالة العامة', hint: 'عمال مخازن وتشغيل' },
+    ];
+    const roleRows = roleDefs.map(d => {
+      const list = this.workers.filter(w => this.roleOf(w.profession) === d.key);
+      return {
+        ...d,
+        count: list.length,
+        present: list.filter(w => presentTodaySet.has(w.code)).length,
+        pct: totalRegistered ? Math.round((list.length / totalRegistered) * 100) : 0,
+      };
+    });
+
+    const presentToday = presentTodaySet.size;
+    return {
+      projectRows, roleRows,
+      ov: {
+        totalRegistered,
+        projectCount: projectRows.length,
+        contractorCount: this.state.contractors.length,
+        presentToday,
+        enrolled: enrolledSet.size,
+        enrolledLabel: enrolledSet.size.toLocaleString('en-US'),
+        presentTodayPct: enrolledSet.size ? Math.round((presentToday / enrolledSet.size) * 100) : 0,
+        presentMonth: presentMonthSet.size,
+        absentToday: Math.max(0, enrolledSet.size - presentToday),
+        unlinkedPunches: unlinkedPunches.length,
+        logSource: this.attendanceSource || '',
+        dayCount: dates.length,
+        periodLabel: dates.length ? dates[0] + ' – ' + dates[dates.length - 1] : '—',
+        today,
+        monthLabel: month,
+      },
+    };
+  }
+
+  addUser() {
+    const s = this.state;
+    if (!s.newUserName.trim()) return;
+    const proj = this.projectsData.find(p => p.code === s.newUserProject) || this.projectsData[0];
+    const scope = s.newUserRole === 'إدارة عليا'
+      ? 'كل المشاريع والمقاولين'
+      : `مشروع ${proj.code} — ${proj.name} فقط`;
+    this.setState({
+      users: [...s.users, { name: s.newUserName.trim(), role: s.newUserRole, scope, projectCode: proj.code }],
+      newUserName: '',
+    });
+  }
+  deleteUser(idx) {
+    this.setState({ users: this.state.users.filter((_, i) => i !== idx) });
+  }
+
+  sarakJobTitles = [
+    'مشرف تنفيذ مدنى','مشرف تشطيبات','مساعد اول مشرف تنفيذ مدنى','مساعد مشرف تنفيذ مدنى','مساعد مشرف تشطيبات',
+    'مراقب عمال','مساعد مشرف رى و زراعة','رئيس بنايين','بنا','مساعد بنا','مبيض محارة','مساعد مبيض محارة',
+    'فنى اول زراعة','فنى زراعة','نجار مسلح','مساعد نجار مسلح','حداد مسلح','فنى عزل','نحات','نقاش','مساعد نقاش',
+    'نجار باب و شباك','صنايعى سيراميك','فنى جبس بورد','استورجى','عامل بوفيه','عامل نظافة','DC','مساعد مساح',
+    'فنى تكييف','مساعد مشرف كهرباء','مساعد مشرف صحى','مساعد مشرف صاج','فنى صحى','مساعد فنى صحى','فنى كهرباء',
+    'مساعد فنى كهرباء','مساعد مشرف عمرات','سائق لودر','سائق جرار زراعى','فنى عمرات','فنى كهرباء معدات','فنى لحام',
+    'فنى ميكانيكى معدات','مساعد فنى ميكانيكى معدات','فنى شدة معدنية','صبان بحرية','ممرض','عامل مخزن',
+    'مندوب تسليمات','فرد امن','مساعد منسق مستندات',
+  ];
+
+  professionsData = this.sarakJobTitles.map((name, i) => {
+    const isSupervisor = name.includes('مشرف') || name.includes('رئيس');
+    const isHelper = name.includes('مساعد') || name.includes('عامل نظافة') || name.includes('عامل بوفيه');
+    const category = isSupervisor ? 'A' : (isHelper ? 'C' : 'B');
+    const hourRate = isSupervisor ? 32.0 : (isHelper ? 16.0 : 22.0);
+    return {
+      code: String(200 + i), name, category,
+      hourRate, overtimeRate: Math.round(hourRate * 1.25 * 100) / 100, deductionRate: Math.round(hourRate * 1.25 * 100) / 100,
+      stopped: false,
+    };
+  });
+
+  shiftsData = [
+    { code: '7To14', start: '07:00', end: '14:00', breakHours: 0, hours: 7, full: true },
+    { code: '8To17G', start: '08:00', end: '17:00', breakHours: 1, hours: 8, full: false },
+  ];
+
+  attendanceLogData = [
+    { id: 23831, code: '14710061', date: '14/08/2026', time: '08:15', type: 'In' },
+    { id: 23832, code: '14710002', date: '14/08/2026', time: '08:15', type: 'In' },
+    { id: 23833, code: '14710082', date: '14/08/2026', time: '08:19', type: 'In' },
+    { id: 23834, code: '14710003', date: '14/08/2026', time: '08:19', type: 'In' },
+    { id: 23835, code: '14710004', date: '14/08/2026', time: '08:19', type: 'In' },
+    { id: 23836, code: '14710005', date: '14/08/2026', time: '08:25', type: 'In' },
+    { id: 23837, code: '14710001', date: '14/08/2026', time: '08:25', type: 'In' },
+    { id: 23839, code: '14710009', date: '14/08/2026', time: '09:32', type: 'In' },
+    { id: 23844, code: '14710004', date: '14/08/2026', time: '17:05', type: 'Out' },
+    { id: 23849, code: '14710002', date: '15/08/2026', time: '08:34', type: 'In' },
+    { id: 23850, code: '14710003', date: '15/08/2026', time: '08:34', type: 'In' },
+    { id: 23855, code: '14710001', date: '15/08/2026', time: '09:01', type: 'In' },
+    { id: 23859, code: '14710009', date: '15/08/2026', time: '17:00', type: 'Out' },
+    { id: 23868, code: '14710004', date: '15/08/2026', time: '19:59', type: 'Out' },
+  ];
+
+  roleDescriptions = {
+    'إدارة عليا': 'وصول كامل لكل المشاريع والمقاولين، التقارير وKPI، إدارة المستخدمين والأدوار.',
+    'إشراف': 'عرض وتعديل سراكي وحضور نطاقه فقط، موافقة الاستثناءات والساعات الإضافية.',
+    'إدخال بيانات': 'تسجيل حضور/انصراف وإضافة بيان عمل لليوم الحالي فقط، بلا وصول لتقارير التكلفة.',
+  };
+
+  setScreen(screen) { this.setState({ screen, selectedWorkerCode: null }); }
+  gotoContractor(delta) {
+    const n = this.state.contractors.length;
+    this.setState({ contractorIndex: (this.state.contractorIndex + delta + n) % n });
+  }
+  onNewContractorField(field, e) { this.setState({ [field]: e.target.value }); }
+  addContractor() {
+    const s = this.state;
+    if (!s.newContractorCode.trim() || !s.newContractorName.trim()) return;
+    const c = {
+      code: s.newContractorCode.trim(), name: s.newContractorName.trim(), type: s.newContractorType,
+      active: true, regDate: s.newContractorDate.trim() || new Date().toLocaleDateString('en-GB'),
+    };
+    this.setState({
+      contractors: [...s.contractors, c],
+      contractorIndex: s.contractors.length,
+      newContractorCode: '', newContractorName: '', newContractorDate: '',
+    });
+  }
+  deleteContractor() {
+    const s = this.state;
+    if (s.contractors.length <= 1) return;
+    const contractors = s.contractors.filter((_, i) => i !== s.contractorIndex);
+    this.setState({ contractors, contractorIndex: Math.min(s.contractorIndex, contractors.length - 1) });
+  }
+  selectWorker(code) { this.setState({ selectedWorkerCode: code }); }
+  clearWorker() { this.setState({ selectedWorkerCode: null }); }
+  gotoProfPage(delta) {
+    const total = this.professionsData.length + this.state.addedProfessions.length;
+    const max = Math.ceil(total / this.PROF_PAGE_SIZE) - 1;
+    this.setState({ profPage: Math.min(max, Math.max(0, this.state.profPage + delta)) });
+  }
+  gotoLogPage(delta) {
+    const max = Math.ceil(this.attendanceLogData.length / this.PAGE_SIZE) - 1;
+    this.setState({ logPage: Math.min(max, Math.max(0, this.state.logPage + delta)) });
+  }
+  setRoleView(roleView) { this.setState({ roleView }); }
+  onSearchChange(e) { this.setState({ workerSearch: e.target.value, workerPage: 0 }); }
+  onManualChange(e) { this.setState({ manualCode: e.target.value }); }
+
+  doScan() {
+    const pool = this.workers;
+    const w = pool[Math.floor(Math.random() * pool.length)];
+    this._logCheckin(w);
+  }
+  doManualScan() {
+    const code = this.state.manualCode.trim();
+    const w = this.workers.find(x => x.code === code);
+    if (!w) return;
+    this._logCheckin(w);
+    this.setState({ manualCode: '' });
+  }
+  _logCheckin(w) {
+    const alreadyIn = this.state.scanLog.some(s => s.code === w.code && s.type === 'in') &&
+      !this.state.scanLog.some(s => s.code === w.code && s.type === 'out');
+    const type = alreadyIn ? 'out' : 'in';
+    const now = new Date();
+    const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    this.setState({ scanLog: [{ code: w.code, name: w.name, time, type }, ...this.state.scanLog] });
+  }
+
+  renderVals() {
+    if (typeof window !== 'undefined') { window.__rc = (window.__rc || 0) + 1; if (window.__rc < 30) console.log('RV', window.__rc, Math.round(performance.now())); }
+    const s = this.state;
+    if (!this._codeToWorker) {
+      this._codeToWorker = {};
+      this.workers.forEach(w => { this._codeToWorker[w.code] = w; });
+      this._deptOptions = [...new Set(this.workers.map(w => w.dept))];
+    }
+    const codeToWorker = this._codeToWorker;
+    if (!this._byContractor) {
+      this._byContractor = new Map();
+      this.workers.forEach(w => {
+        if (!this._byContractor.has(w.contractor)) this._byContractor.set(w.contractor, []);
+        this._byContractor.get(w.contractor).push(w);
+      });
+      this._profBars = null;
+      this._contractorName = {};
+      s.contractors.forEach(c => { this._contractorName[c.code] = c.name; });
+    }
+    const logKey = [s.logType, s.logDept, s.logSearch, s.logDate, s.workerRev].join('|');
+    if (this._logKey !== logKey) {
+      this._logKey = logKey;
+      this._filteredLog = this.attendanceLogData.filter(l => {
+        const w = codeToWorker[l.code];
+        if (s.logDate && s.logDate !== 'all' && l.date !== s.logDate) return false;
+        if (s.logType !== 'all' && l.type !== s.logType) return false;
+        if (s.logDept !== 'all' && (!w || w.dept !== s.logDept)) return false;
+        if (s.logSearch && !(l.code.includes(s.logSearch) || (w && w.name.includes(s.logSearch)))) return false;
+        return true;
+      });
+    }
+    const filteredLog = this._filteredLog;
+    const withSelect = (w) => ({
+      ...w,
+      regDate: w.regDate || '17/07/2022',
+      startDate: w.startDate || '01/08/2022',
+      contractorName: (this._contractorName || {})[w.contractor] || '—',
+      selectHandler: () => this.selectWorker(w.code),
+      deleteHandler: () => this.deleteWorker(w.code),
+      categoryHandler: (e) => this.setWorkerCategory(w.code, e.target.value),
+    });
+    const wmKey = (s.workerSearch || '') + '|' + s.workerRev;
+    if (this._wmKey !== wmKey) {
+      this._wmKey = wmKey;
+      this._workerMatches = !s.workerSearch ? this.workers : this.workers.filter(w =>
+        w.name.includes(s.workerSearch) || w.code.includes(s.workerSearch) || (w.profession || '').includes(s.workerSearch)
+      );
+    }
+    const workerMatches = this._workerMatches;
+    const workerMatchCount = workerMatches.length;
+    const wPages = Math.max(1, Math.ceil(workerMatchCount / this.WORKER_VIEW_LIMIT));
+    const wPage = Math.min(s.workerPage || 0, wPages - 1);
+    const wStart = wPage * this.WORKER_VIEW_LIMIT;
+    const filteredWorkers = workerMatches.slice(wStart, wStart + this.WORKER_VIEW_LIMIT).map(withSelect);
+    const workerViewNote = 'عرض ' + (workerMatchCount ? (wStart + 1) : 0) + ' – ' +
+      Math.min(wStart + this.WORKER_VIEW_LIMIT, workerMatchCount) + ' من ' +
+      workerMatchCount.toLocaleString('en-US') + ' عامل';
+    const workerPageLabel = (wPage + 1) + ' / ' + wPages.toLocaleString('en-US');
+    const gotoWorkerPage = (d) => this.setState({ workerPage: Math.min(wPages - 1, Math.max(0, wPage + d)) });
+    const scanLog = s.scanLog.map(x => ({ ...x, typeLabel: x.type === 'in' ? 'دخول' : 'خروج', tagClass: x.type === 'in' ? 'tag-accent' : 'tag-accent-2' }));
+    if (this._profBarsRev !== s.workerRev || !this._profBars) {
+      this._profBarsRev = s.workerRev;
+      const professionCounts = {};
+      this.workers.forEach(w => { professionCounts[w.profession] = (professionCounts[w.profession] || 0) + 1; });
+      const maxCount = Math.max(1, ...Object.values(professionCounts));
+      this._profBars = Object.entries(professionCounts)
+        .sort((a, b) => b[1] - a[1]).slice(0, 12)
+        .map(([name, count]) => ({ name, count, pct: Math.round((count / maxCount) * 100) }));
+    }
+    const professionBars = this._profBars;
+    const dash = this.dashboardAnalytics();
+
+    const totalWorkers = this.workers.length;
+    const presentCount = dash.ov.presentToday;
+    const sarakCount = this.sarakRecords.length;
+    const matchedCount = this.sarakRecords.filter(r => r.status === 'مطابق').length;
+
+    return {
+      screen: s.screen,
+      ...dash,
+      workerViewNote,
+      workerMatchCount,
+      workerPageLabel,
+      gotoWorkerPrev: () => gotoWorkerPage(-1),
+      gotoWorkerNext: () => gotoWorkerPage(1),
+      gotoWorkerFirst: () => this.setState({ workerPage: 0 }),
+      gotoWorkerLast: () => this.setState({ workerPage: wPages - 1 }),
+      dsProjects: (s.datasetInfo || {}).projects || this.projectsData.length,
+      dsSelf: ((s.datasetInfo || {}).self || 0).toLocaleString('en-US'),
+      dsSub: ((s.datasetInfo || {}).sub || 0).toLocaleString('en-US'),
+      dsContractors: (s.datasetInfo || {}).contractors || this.state.contractors.length,
+      isDashboard: s.screen === 'dashboard', dashboardActive: s.screen === 'dashboard' ? 'active' : '',
+      isAnalytics: s.screen === 'analytics', analyticsActive: s.screen === 'analytics' ? 'active' : '',
+      an: s.screen === 'analytics' ? this.analytics().an : {},
+      anChart: s.screen === 'analytics' ? this.analytics().chart : [],
+      anWeekdays: s.screen === 'analytics' ? this.analytics().weekdays : [],
+      anForecast: s.screen === 'analytics' ? this.analytics().forecast : [],
+      anRoles: s.screen === 'analytics' ? this.analytics().roleAnalysis : [],
+      anProjects: s.screen === 'analytics' ? this.analytics().projectAnalysis : [],
+      anDays: s.screen === 'analytics' ? this.analytics().dayRows : [],
+      isWorkers: s.screen === 'workers', workersActive: s.screen === 'workers' ? 'active' : '',
+      isScan: s.screen === 'scan', scanActive: s.screen === 'scan' ? 'active' : '',
+      isContractors: s.screen === 'contractors', contractorsActive: s.screen === 'contractors' ? 'active' : '',
+      isProfessions: s.screen === 'professions', professionsActive: s.screen === 'professions' ? 'active' : '',
+      isShifts: s.screen === 'shifts', shiftsActive: s.screen === 'shifts' ? 'active' : '',
+      isAttendanceLog: s.screen === 'attendanceLog', attendanceLogActive: s.screen === 'attendanceLog' ? 'active' : '',
+      isSarak: s.screen === 'sarak', sarakActive: s.screen === 'sarak' ? 'active' : '',
+      isAlerts: s.screen === 'alerts', alertsActive: s.screen === 'alerts' ? 'active' : '',
+      isProjectSheet: s.screen === 'projectSheet', projectSheetActive: s.screen === 'projectSheet' ? 'active' : '',
+      isUpload: s.screen === 'upload', uploadActive: s.screen === 'upload' ? 'active' : '',
+      isReports: s.screen === 'reports', reportsActive: s.screen === 'reports' ? 'active' : '',
+      isUsers: s.screen === 'users', usersActive: s.screen === 'users' ? 'active' : '',
+      setScreen: (scr) => this.setScreen(scr),
+      nav: {
+        dashboard: () => this.setScreen('dashboard'),
+        analytics: () => this.setScreen('analytics'),
+        workers: () => this.setScreen('workers'),
+        contractors: () => this.setScreen('contractors'),
+        professions: () => this.setScreen('professions'),
+        shifts: () => this.setScreen('shifts'),
+        scan: () => this.setScreen('scan'),
+        attendanceLog: () => this.setScreen('attendanceLog'),
+        sarak: () => this.setScreen('sarak'),
+        alerts: () => this.setScreen('alerts'),
+        projectSheet: () => this.setScreen('projectSheet'),
+        upload: () => this.setScreen('upload'),
+        reports: () => this.setScreen('reports'),
+        users: () => this.setScreen('users'),
+      },
+      roleHandlers: {
+        admin: () => this.setRoleView('إدارة عليا'),
+        sup: () => this.setRoleView('إشراف'),
+        entry: () => this.setRoleView('إدخال بيانات'),
+      },
+
+      workers: this.workers.slice(0, 100),
+      showWorkerForm: s.showWorkerForm,
+      workerFormLabel: s.showWorkerForm ? 'إغلاق النموذج ✕' : '+ إضافة عامل',
+      toggleWorkerForm: () => this.toggleWorkerForm(),
+      nw: s.nw,
+      nextWorkerCode: this.nextWorkerCode(),
+      nwContractorName: (s.contractors.find(c => c.code === s.nw.contractor) || {}).name || '—',
+      onNwName: (e) => this.setNw('name', e.target.value),
+      onNwCode: (e) => this.setNw('code', e.target.value),
+      onNwProfession: (e) => this.setNw('profession', e.target.value),
+      onNwCard: (e) => this.setNw('card', e.target.value),
+      onNwAllowance: (e) => this.setNw('allowance', e.target.value),
+      onNwCategory: (e) => {
+        const v = e.target.value;
+        const a = (this.state.catRates[v] || {}).allowance;
+        this.setState(st => ({ nw: { ...st.nw, category: v, allowance: a != null ? a : st.nw.allowance } }));
+      },
+      nwRegDateIso: this.toIso(s.nw.regDate),
+      nwStartDateIso: this.toIso(s.nw.startDate),
+      onNwRegDate: (e) => this.setNw('regDate', this.toDmy(e.target.value)),
+      onNwStartDate: (e) => this.setNw('startDate', this.toDmy(e.target.value)),
+      onNwContractor: (e) => this.setNw('contractor', e.target.value),
+      addWorker: () => this.addWorker(),
+      workerSearch: s.workerSearch,
+      onSearchChange: (e) => this.onSearchChange(e),
+      filteredWorkers,
+
+      manualCode: s.manualCode,
+      onManualChange: (e) => this.onManualChange(e),
+      doScan: () => this.doScan(),
+      doManualScan: () => this.doManualScan(),
+      scanLog,
+      scanHint: 'وجّه الكاميرا نحو باركود بطاقة العامل',
+      nowLabel: 'الموقع: ' + (this.state.datasetInfo ? 'كل المشاريع (' + this.state.datasetInfo.projects + ')' : 'مخازن بدر — مشروع 147'),
+
+      contractors: s.contractors,
+      scopeLabel: s.datasetInfo ? 'كل المشاريع — ' + dash.projectRows.length + ' مشروع نشط' : 'مشروع 147 — مخازن بدر',
+      activeContractorLabel: 'المقاول ' + s.contractors[s.contractorIndex].code + ' — ' + s.contractors[s.contractorIndex].name,
+      activeContractorCount: (s.contractors[s.contractorIndex].count != null ? s.contractors[s.contractorIndex].count : (this._byContractor.get(s.contractors[s.contractorIndex].code) || []).length).toLocaleString('en-US'),
+      contractor: (() => { const c = s.contractors[s.contractorIndex]; return { ...c, statusLabel: c.active ? 'العمل مستمر' : 'متوقف', projectName: c.projectName || 'كل المشاريع' }; })(),
+      contractorPos: (s.contractorIndex + 1) + ' / ' + s.contractors.length,
+      contractorWorkers: (this._byContractor.get(s.contractors[s.contractorIndex].code) || []).slice(0, 60).map(withSelect),
+      contractorWorkerCount: (s.contractors[s.contractorIndex].count != null
+        ? s.contractors[s.contractorIndex].count
+        : (this._byContractor.get(s.contractors[s.contractorIndex].code) || []).length).toLocaleString('en-US'),
+      contractorPickValue: String(s.contractorIndex),
+      contractorOptions: s.contractors.map((c, i) => ({ i: String(i), label: c.code + ' — ' + c.name + ' (' + (c.count || 0) + ')' })),
+      onPickContractor: (e) => this.setState({ contractorIndex: Number(e.target.value), selectedWorkerCode: null }),
+      canDeleteContractor: s.contractors.length > 1,
+      gotoContractorPrev: () => this.gotoContractor(-1),
+      gotoContractorNext: () => this.gotoContractor(1),
+      addContractor: () => this.addContractor(),
+      deleteContractor: () => this.deleteContractor(),
+      newContractorCode: s.newContractorCode,
+      newContractorName: s.newContractorName,
+      newContractorType: s.newContractorType,
+      newContractorDate: s.newContractorDate,
+      onNewContractorCode: (e) => this.onNewContractorField('newContractorCode', e),
+      onNewContractorName: (e) => this.onNewContractorField('newContractorName', e),
+      onNewContractorType: (e) => this.onNewContractorField('newContractorType', e),
+      newContractorDateIso: this.toIso(s.newContractorDate),
+      onNewContractorDate: (e) => this.setState({ newContractorDate: this.toDmy(e.target.value) }),
+
+      categoryRates: ['A', 'B', 'C', 'D', 'E'].map(k => ({
+        key: k,
+        label: (s.catRates[k] || {}).label || '—',
+        rate: (s.catRates[k] || {}).rate || '',
+        allowance: (s.catRates[k] || {}).allowance || '',
+        onRate: (e) => this.setCatRate(k, 'rate', e.target.value),
+        onAllowance: (e) => this.setCatRate(k, 'allowance', e.target.value),
+      })),
+      professionsPage: (this._profListRev === s.addedProfessions.length ? this._profList
+        : (this._profListRev = s.addedProfessions.length, this._profList = [...this.professionsData, ...s.addedProfessions]))
+        .slice(s.profPage * this.PROF_PAGE_SIZE, s.profPage * this.PROF_PAGE_SIZE + this.PROF_PAGE_SIZE)
+        .map(p => ({ ...p, statusLabel: p.stopped ? 'متوقفة' : 'سارية' })),
+      professions: [...this.professionsData, ...s.addedProfessions].map(p => ({ ...p, statusLabel: p.stopped ? 'متوقفة' : 'سارية' })),
+      profPageLabel: (s.profPage + 1) + ' / ' + Math.ceil((this.professionsData.length + s.addedProfessions.length) / this.PROF_PAGE_SIZE),
+      gotoProfPrev: () => this.gotoProfPage(-1), gotoProfNext: () => this.gotoProfPage(1),
+      newProfName: s.newProfName,
+      newProfCategory: s.newProfCategory,
+      availableProfessionTitles: this.sarakJobTitles,
+      onNewProfName: (e) => this.setState({ newProfName: e.target.value }),
+      onNewProfCategory: (e) => this.setState({ newProfCategory: e.target.value }),
+      addProfession: () => this.addProfession(),
+
+      shifts: this.shiftsData.map(sh => ({ ...sh, fullLabel: sh.full ? 'كاملة' : 'حسب الحضور' })),
+
+      attendanceLogPage: filteredLog.slice(s.logPage * this.PAGE_SIZE, s.logPage * this.PAGE_SIZE + this.PAGE_SIZE)
+        .map(l => { const w = codeToWorker[l.code] || {}; return { ...l, name: w.name || '—', dept: w.dept || '—', typeLabel: l.type === 'In' ? 'دخول' : 'خروج' }; }),
+      logPageLabel: (s.logPage + 1) + ' / ' + Math.max(1, Math.ceil(filteredLog.length / this.PAGE_SIZE)),
+      gotoLogPrev: () => this.gotoLogPage(-1), gotoLogNext: () => this.gotoLogPage(1),
+      logSearch: s.logSearch, onLogSearch: (e) => this.onLogSearch(e),
+      logDate: s.logDate || 'all',
+      logDateOptions: (this.attendanceDates || []).slice().reverse(),
+      onLogDate: (e) => this.setState({ logDate: e.target.value, logPage: 0 }),
+      logDept: s.logDept, onLogDept: (e) => this.onLogDept(e),
+      logType: s.logType, onLogType: (e) => this.onLogType(e),
+      deptOptions: this._deptOptions,
+      sarakWorkerOptions: (() => {
+        if (!this._enrolledWorkers) {
+          const set = new Set(this.attendanceLogData.map(l => l.code));
+          this._enrolledWorkers = this.workers.filter(w => set.has(w.code)).slice(0, 200);
+        }
+        return this._enrolledWorkers.length ? this._enrolledWorkers : this.workers.slice(0, 60);
+      })(),
+
+      selectWorker: (code) => this.selectWorker(code),
+      clearWorker: () => this.clearWorker(),
+      hasSelectedWorker: !!s.selectedWorkerCode,
+      selectedWorker: (() => {
+        if (!s.selectedWorkerCode) return null;
+        const w = codeToWorker[s.selectedWorkerCode];
+        if (!w) return null;
+        return {
+          ...w,
+          logs: this.attendanceLogData.filter(l => l.code === w.code).slice(0, 12).map(l => ({ ...l, typeLabel: l.type === 'In' ? 'دخول' : 'خروج' })),
+          sarak: this.sarakRecords.filter(r => r.workerCode === w.code),
+        };
+      })(),
+
+      sarakRecords: this.sarakRecords,
+      sarakPage: [...this.sarakRecords, ...s.addedSaraks].map(r => ({
+        ...r, inTime: r.inTime || '—', outTime: r.outTime || '—', hours: r.hours || '—',
+      })),
+      newSarakWorker: s.newSarakWorker, onNewSarakWorker: (e) => this.setState({ newSarakWorker: e.target.value }),
+      newSarakDate: s.newSarakDate,
+      newSarakDateIso: this.toIso(s.newSarakDate),
+      punchMinIso: this.toIso((this.attendanceDates || [])[0] || ''),
+      punchMaxIso: this.toIso((this.attendanceDates || [])[(this.attendanceDates || []).length - 1] || ''),
+      onNewSarakDate: (e) => this.setState({ newSarakDate: this.toDmy(e.target.value) }),
+      newSarakWork: s.newSarakWork, onNewSarakWork: (e) => this.setState({ newSarakWork: e.target.value }),
+      newSarakShift: s.newSarakShift, onNewSarakShift: (e) => this.setState({ newSarakShift: e.target.value }),
+      addSarak: () => this.addSarak(),
+      uploadedFiles: s.uploadedFiles,
+      newUploadTarget: s.newUploadTarget, onNewUploadTarget: (e) => this.setState({ newUploadTarget: e.target.value }),
+      onUploadFile: (e) => this.onUploadFile(e),
+      addUpload: () => this.addUpload(),
+      allAlerts: this.allAlertsData,
+      topAlerts: this.allAlertsData.slice(0, 3),
+      alertCount: this.allAlertsData.length,
+
+      professionBars,
+
+      dashboardKpis: [
+        { code: 'KPI-01', label: 'نسبة الحضور اليوم', value: dash.ov.presentTodayPct + '%', meta: dash.ov.presentToday + ' من ' + dash.ov.enrolledLabel + ' عامل على أجهزة البصمة', color: 'var(--color-accent-700)' },
+        { code: 'KPI-02', label: 'نسبة المطابقة الآلية', value: Math.round((matchedCount / sarakCount) * 100) + '%', meta: matchedCount + ' من ' + sarakCount + ' سرك', color: 'var(--color-text)' },
+        { code: 'KPI-03', label: 'ساعات إضافية (الشهر)', value: '46', meta: 'ساعة إجمالي', color: 'var(--color-accent-2-700)' },
+        { code: 'KPI-04', label: 'استثناءات مفتوحة', value: String(this.allAlertsData.length), meta: 'تحتاج مراجعة', color: 'var(--color-text)' },
+      ].filter(k => !s.hiddenKpis.includes(k.code)).map(k => ({ ...k, deleteHandler: () => this.deleteKpi(k.code) })),
+      reportKpis: [
+        { code: 'KPI-11', label: 'تكلفة العمالة الفعلية', value: '184,300', meta: 'جنيه — أغسطس 2026' },
+        { code: 'KPI-12', label: 'دقة التسجيل', value: '96%', meta: 'مؤشر SMART تشغيلي' },
+        { code: 'KPI-13', label: 'التزام الحضور بالمقاولين', value: '91%', meta: 'مؤشر مقاولون — BSC' },
+      ].filter(k => !s.hiddenKpis.includes(k.code)).map(k => ({ ...k, deleteHandler: () => this.deleteKpi(k.code) })),
+      hasHiddenKpis: s.hiddenKpis.length > 0,
+      hiddenKpiCount: s.hiddenKpis.length,
+      restoreKpis: () => this.restoreKpis(),
+
+      kpis: {
+        totalWorkers,
+        presentCount,
+        attendanceRate: Math.round((presentCount / totalWorkers) * 100),
+        sarakCount,
+        matchedCount,
+        matchRate: Math.round((matchedCount / sarakCount) * 100),
+        overtimeHours: 46,
+      },
+
+      users: s.users.map((u, i) => ({ ...u, deleteHandler: () => this.deleteUser(i) })),
+      newUserName: s.newUserName,
+      newUserRole: s.newUserRole,
+      newUserProject: s.newUserProject,
+      projects: this.projectsData,
+      onNewUserName: (e) => this.setState({ newUserName: e.target.value }),
+      onNewUserRole: (e) => this.setState({ newUserRole: e.target.value }),
+      onNewUserProject: (e) => this.setState({ newUserProject: e.target.value }),
+      addUser: () => this.addUser(),
+      roleView: s.roleView,
+      setRoleView: (r) => this.setRoleView(r),
+      roleDescription: this.roleDescriptions[s.roleView],
+      roleAdminClass: s.roleView === 'إدارة عليا' ? 'on' : '',
+      roleSupClass: s.roleView === 'إشراف' ? 'on' : '',
+      roleEntryClass: s.roleView === 'إدخال بيانات' ? 'on' : '',
+    };
+  }
+}
+
+</script>
+</body>
+</html>
