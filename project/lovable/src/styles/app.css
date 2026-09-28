@@ -1,0 +1,9 @@
+/* تعديلات خاصة بتطبيق React فوق أنماط النموذج */
+a.navitem { text-decoration: none; }
+.app .card { background: var(--surface); color: var(--ink); }
+.app .input { background: var(--surface); color: var(--ink); }
+/* فى الإنجليزية (LTR) يقع العدّاد وعنوان الرأس فى نفس الجهة — ننقل العدّاد للطرف المقابل */
+.app[dir="ltr"] .hero-index { inset-inline-start: auto; inset-inline-end: var(--space-8); }
+/* ألوان Tailwind القديمة (text-navy) فى الوضع الداكن — تتبع لون الإبراز المقروء */
+.app[data-theme="dark"] .text-navy { color: var(--accent-fg); }
+.app[data-theme="dark"] .text-ink { color: var(--ink); }

@@ -45,8 +45,8 @@ export default function Workers() {
           </select>
         </Field>
         <div className="flex gap-2">
-          {can('addWorker') && <button className="btn-primary" onClick={() => setOpen(true)}>إضافة عامل</button>}
-          <button className="btn-ghost" onClick={() => exportSheet(filtered as unknown as Record<string, unknown>[], 'العمال')}>تصدير Excel</button>
+          {can('addWorker') && <button className="btn btn-primary" onClick={() => setOpen(true)}>إضافة عامل</button>}
+          <button className="btn btn-secondary" onClick={() => exportSheet(filtered as unknown as Record<string, unknown>[], 'العمال')}>تصدير Excel</button>
         </div>
         <span className="text-xs text-ink/50">{filtered.length.toLocaleString('en-US')} نتيجة</span>
       </div>
@@ -69,9 +69,9 @@ export default function Workers() {
 
       {pages > 1 && (
         <div className="flex items-center gap-2 text-sm">
-          <button className="btn-ghost" onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>السابق</button>
+          <button className="btn btn-secondary" onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>السابق</button>
           <span dir="ltr">{page + 1} / {pages}</span>
-          <button className="btn-ghost" onClick={() => setPage(p => Math.min(pages - 1, p + 1))} disabled={page >= pages - 1}>التالي</button>
+          <button className="btn btn-secondary" onClick={() => setPage(p => Math.min(pages - 1, p + 1))} disabled={page >= pages - 1}>التالي</button>
         </div>
       )}
 
@@ -153,8 +153,8 @@ function AddWorker({ open, onClose }: { open: boolean; onClose: () => void }) {
         <Field label="المسؤول المباشر"><input className="input" value={w.manager} onChange={e => set('manager', e.target.value)} /></Field>
       </div>
       <div className="mt-4 flex gap-2">
-        <button className="btn-primary" onClick={save} disabled={!valid}>حفظ</button>
-        <button className="btn-ghost" onClick={onClose}>إلغاء</button>
+        <button className="btn btn-primary" onClick={save} disabled={!valid}>حفظ</button>
+        <button className="btn btn-secondary" onClick={onClose}>إلغاء</button>
       </div>
     </Modal>
   );

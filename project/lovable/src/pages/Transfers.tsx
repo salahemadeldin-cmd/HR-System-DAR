@@ -87,7 +87,7 @@ export default function Transfers() {
           <Field label="سبب النقل"><input className="input" value={reason} onChange={e => setReason(e.target.value)} /></Field>
         </div>
         <div className="mt-4">
-          <button className="btn-primary" onClick={doTransfer} disabled={!worker || !toProject}>تنفيذ النقل</button>
+          <button className="btn btn-primary" onClick={doTransfer} disabled={!worker || !toProject}>تنفيذ النقل</button>
         </div>
       </div>
 

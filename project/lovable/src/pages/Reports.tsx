@@ -39,8 +39,8 @@ export default function Reports() {
             {periods.map(p => <option key={p} value={p}>{p}</option>)}
           </select>
         </Field>
-        <button className="btn-primary" onClick={() => window.print()} disabled={!project}>طباعة / PDF</button>
-        <button className="btn-ghost" disabled={!project} onClick={() => exportBook([
+        <button className="btn btn-primary" onClick={() => window.print()} disabled={!project}>طباعة / PDF</button>
+        <button className="btn btn-secondary" disabled={!project} onClick={() => exportBook([
           { name: 'Settlement', rows: rows as unknown as Record<string, unknown>[] },
           { name: 'Sarak', rows: db!.sarakEntries.filter(e => e.projectCode === project) as unknown as Record<string, unknown>[] },
         ], `تقرير ${projectName}`)}>تصدير Excel</button>

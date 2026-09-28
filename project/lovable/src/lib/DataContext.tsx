@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { Db, Role } from './types';
 import { loadDb, saveDb, resetDb } from './storage';
+import { useAuth, type PermKey } from './auth';
 
 interface Ctx {
   db: Db | null;
@@ -17,6 +18,7 @@ const DataCtx = createContext<Ctx | null>(null);
 export function DataProvider({ children }: { children: React.ReactNode }) {
   const [db, setDb] = useState<Db | null>(null);
   const [loading, setLoading] = useState(true);
+  const auth = useAuth();
   const [role, setRole] = useState<Role>(() => (localStorage.getItem('sarak-role') as Role) || 'admin');
 
   useEffect(() => { loadDb().then(d => { setDb(d); setLoading(false); }); }, []);
@@ -24,10 +26,11 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
 
   const value = useMemo<Ctx>(() => ({
     db, loading, role, setRole,
-    can: (perm) => !!db?.permissions?.[role]?.[perm],
+    // الصلاحيات من دور المستخدم المسجَّل دخوله (lib/auth.tsx)
+    can: (perm) => auth.can(perm as PermKey),
     update: (fn) => setDb(prev => { if (!prev) return prev; const next = fn(prev); saveDb(next); return next; }),
     reset: () => { setLoading(true); resetDb().then(d => { setDb(d); setLoading(false); }); },
-  }), [db, loading, role]);
+  }), [db, loading, role, auth]);
 
   return <DataCtx.Provider value={value}>{children}</DataCtx.Provider>;
 }

@@ -46,7 +46,7 @@ export default function Settlements() {
             {DEPARTMENTS.map(d => <option key={d} value={d}>{d}</option>)}
           </select>
         </Field>
-        <button className="btn-ghost" onClick={() => exportSheet(rows as unknown as Record<string, unknown>[], 'التسويات')}>تصدير Excel</button>
+        <button className="btn btn-secondary" onClick={() => exportSheet(rows as unknown as Record<string, unknown>[], 'التسويات')}>تصدير Excel</button>
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">

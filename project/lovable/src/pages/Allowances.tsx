@@ -46,7 +46,7 @@ export default function Allowances() {
           </Field>
         )}
         <Field label="بحث"><input className="input" value={q} onChange={e => setQ(e.target.value)} /></Field>
-        <button className="btn-ghost" onClick={() => exportBook([
+        <button className="btn btn-secondary" onClick={() => exportBook([
           { name: 'Workers', rows: db!.workers.filter(w => w.housingAllowance || w.transportAllowance) as unknown as Record<string, unknown>[] },
           { name: 'Contractors', rows: db!.contractors as unknown as Record<string, unknown>[] },
         ], 'البدلات')}>تصدير Excel</button>

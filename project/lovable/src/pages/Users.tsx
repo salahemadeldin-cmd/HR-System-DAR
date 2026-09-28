@@ -55,7 +55,7 @@ export default function Users() {
           الدور المفعّل حاليًا للمعاينة: <strong>{ROLE_LABELS[role]}</strong>.
           البيانات محفوظة محليًا في المتصفح (IndexedDB). لإعادتها إلى بيانات الاستيراد الأصلية:
         </p>
-        <button className="btn-danger" onClick={() => { if (confirm('سيتم مسح كل التعديلات المحلية والعودة لبيانات الاستيراد. متابعة؟')) reset(); }}>
+        <button className="btn btn-danger" onClick={() => { if (confirm('سيتم مسح كل التعديلات المحلية والعودة لبيانات الاستيراد. متابعة؟')) reset(); }}>
           إعادة تعيين قاعدة البيانات
         </button>
       </div>

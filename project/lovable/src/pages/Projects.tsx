@@ -43,8 +43,8 @@ export default function Projects() {
         </div>
         {tab === 'projects' && <Field label="بحث"><input className="input" value={q} onChange={e => setQ(e.target.value)} placeholder="كود أو اسم المشروع" /></Field>}
         <div className="flex gap-2">
-          {tab === 'projects' && <button className="btn-primary" onClick={() => setOpen(true)}>إنشاء مشروع</button>}
-          <button className="btn-ghost" onClick={() => exportBook([
+          {tab === 'projects' && <button className="btn btn-primary" onClick={() => setOpen(true)}>إنشاء مشروع</button>}
+          <button className="btn btn-secondary" onClick={() => exportBook([
             { name: 'Projects', rows: db!.projects as unknown as Record<string, unknown>[] },
             { name: 'Sectors', rows: db!.sectors as unknown as Record<string, unknown>[] },
             { name: 'Sites', rows: db!.sites as unknown as Record<string, unknown>[] },
@@ -92,8 +92,8 @@ export default function Projects() {
         </div>
         {dupCode && p.code && <p className="mt-2 text-xs text-danger">هذا الكود مستخدم بالفعل.</p>}
         <div className="mt-4 flex gap-2">
-          <button className="btn-primary" onClick={save} disabled={!p.code.trim() || !p.name.trim() || dupCode}>حفظ</button>
-          <button className="btn-ghost" onClick={() => setOpen(false)}>إلغاء</button>
+          <button className="btn btn-primary" onClick={save} disabled={!p.code.trim() || !p.name.trim() || dupCode}>حفظ</button>
+          <button className="btn btn-secondary" onClick={() => setOpen(false)}>إلغاء</button>
         </div>
       </Modal>
     </div>

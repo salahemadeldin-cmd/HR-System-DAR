@@ -50,8 +50,8 @@ export default function Professions() {
         </Field>
         <Field label="بحث"><input className="input" value={q} onChange={e => setQ(e.target.value)} placeholder="اسم المهنة" /></Field>
         <div className="flex gap-2">
-          <button className="btn-primary" onClick={() => setAddOpen(true)}>إضافة مهنة</button>
-          <button className="btn-ghost" onClick={() => exportSheet(rows as unknown as Record<string, unknown>[], 'المهن والفئات')}>تصدير Excel</button>
+          <button className="btn btn-primary" onClick={() => setAddOpen(true)}>إضافة مهنة</button>
+          <button className="btn btn-secondary" onClick={() => exportSheet(rows as unknown as Record<string, unknown>[], 'المهن والفئات')}>تصدير Excel</button>
         </div>
         <span className="text-xs text-ink/50">{rows.length} مهنة</span>
       </div>
@@ -67,7 +67,7 @@ export default function Professions() {
             <td className="td" dir="ltr">{money(hourRate(p.dailyValue))}</td>
             <td className="td"><span className="tag">{p.stopped ? 'موقوفة' : 'سارية'}</span></td>
             <td className="td">
-              <button className="btn-ghost" style={{ padding: '2px 10px', fontSize: 12 }}
+              <button className="btn btn-secondary" style={{ padding: '2px 10px', fontSize: 12 }}
                 onClick={() => setEdit({ p, value: String(p.dailyValue), grade: p.grade, eff: new Date().toISOString().slice(0, 10) })}>
                 تعديل
               </button>
@@ -96,8 +96,8 @@ export default function Professions() {
               التغيير يسري على كل العمال بهذه المهنة من تاريخ السريان، ولا يمسّ السراكي المعتمدة قبله.
             </p>
             <div className="mt-4 flex gap-2">
-              <button className="btn-primary" onClick={applyChange}>تأكيد التغيير</button>
-              <button className="btn-ghost" onClick={() => setEdit(null)}>إلغاء</button>
+              <button className="btn btn-primary" onClick={applyChange}>تأكيد التغيير</button>
+              <button className="btn btn-secondary" onClick={() => setEdit(null)}>إلغاء</button>
             </div>
           </>
         )}
@@ -134,8 +134,8 @@ function AddProfession({ open, onClose }: { open: boolean; onClose: () => void }
         <Field label="القيمة اليومية"><input className="input" dir="ltr" value={p.value} onChange={e => setP({ ...p, value: e.target.value })} /></Field>
       </div>
       <div className="mt-4 flex gap-2">
-        <button className="btn-primary" onClick={save} disabled={!p.name.trim() || !p.value}>حفظ</button>
-        <button className="btn-ghost" onClick={onClose}>إلغاء</button>
+        <button className="btn btn-primary" onClick={save} disabled={!p.name.trim() || !p.value}>حفظ</button>
+        <button className="btn btn-secondary" onClick={onClose}>إلغاء</button>
       </div>
     </Modal>
   );

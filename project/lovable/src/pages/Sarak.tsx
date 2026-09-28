@@ -101,8 +101,8 @@ export default function Sarak() {
           <Field label="المنطقة / الموقع"><input className="input" value={f.region} onChange={e => set('region', e.target.value)} /></Field>
         </div>
         <div className="mt-4 flex items-center gap-2">
-          <button className="btn-primary" onClick={submit} disabled={!f.project || !f.details.trim()}>حفظ البيان</button>
-          <button className="btn-ghost" onClick={() => exportSheet(db!.sarakEntries as unknown as Record<string, unknown>[], 'سراكي')}>تصدير Excel</button>
+          <button className="btn btn-primary" onClick={submit} disabled={!f.project || !f.details.trim()}>حفظ البيان</button>
+          <button className="btn btn-secondary" onClick={() => exportSheet(db!.sarakEntries as unknown as Record<string, unknown>[], 'سراكي')}>تصدير Excel</button>
           <span className="text-xs text-ink/50">إجمالي السجلات: {db!.sarakEntries.length.toLocaleString('en-US')}</span>
         </div>
       </div>
