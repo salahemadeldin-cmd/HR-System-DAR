@@ -1,0 +1,9 @@
+/* Dar Group OD — public site tokens (group palette from company-theme.js: deep #181818, primary #353535, accent #969BA2) */
+@font-face{font-family:'Dar Arabic';src:url('/site/assets/performance-arabic-regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Dar Arabic';src:url('/site/assets/performance-arabic-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+:root{--ink:#181818;--ink-2:#353535;--accent:#969BA2;--paper:#F8F9FA;--soft:#F0F1F2;--line:#DDE0E3;--muted:#5f6670;--text:#303236}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Dar Arabic',Tahoma,Arial,sans-serif;color:var(--text);background:var(--paper);line-height:1.7}
+img{max-width:100%;display:block}
+a{color:inherit}

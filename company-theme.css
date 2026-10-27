@@ -1,0 +1,65 @@
+/* Company color tokens are applied once on the body; semantic warning/error colors remain intact. */
+body[data-company-theme]{background-color:var(--company-surface);color:var(--company-ink)}
+body[data-company-theme] aside{background:var(--deep)!important;border-block-start:3px solid var(--accent)}
+body[data-company-theme] aside h1,body[data-company-theme] .side-title{color:#fff}
+body[data-company-theme] aside small,body[data-company-theme] .account-name{color:#e8e9ef}
+body[data-company-theme] .shell-nav h3{color:#ffffff9c}
+body[data-company-theme] .shell-nav a{color:#e7e9f0;border-inline-start:3px solid transparent}
+body[data-company-theme] .shell-nav a:hover{background:#ffffff0e;color:#fff}
+body[data-company-theme] .shell-nav a.active{background:var(--od);color:#fff;border-inline-start-color:var(--company-highlight);box-shadow:0 3px 10px #00000012}
+body[data-company-theme] .side-footer select:focus-visible,body[data-company-theme] .shell-nav a:focus-visible{outline:2px solid var(--company-highlight);outline-offset:2px}
+body[data-company-theme] .side-footer select,body[data-company-theme] .side-footer button{background:#ffffff0d;color:#fff;border-color:#ffffff30}
+body[data-company-theme] .side-footer option{background:#fff;color:var(--company-ink)}
+body[data-company-theme] #workspaceName,body[data-company-theme] .portal-content h2,body[data-company-theme] .portal-content h3{color:var(--company-ink)}
+body[data-company-theme] #motionToggle{border-color:var(--company-line);color:var(--od);background:#ffffffeb}
+body[data-company-theme] .local-notice{background:var(--company-soft);color:var(--company-ink);border:1px solid var(--company-line)}
+body[data-company-theme] .hero{background:linear-gradient(125deg,var(--deep),var(--od))}
+body[data-company-theme] .hero-shade{background:linear-gradient(270deg,rgba(var(--company-deep-rgb),.95),rgba(var(--company-deep-rgb),.79) 44%,rgba(var(--company-deep-rgb),.20))}
+html[dir=ltr] body[data-company-theme] .hero-shade{background:linear-gradient(90deg,rgba(var(--company-deep-rgb),.95),rgba(var(--company-deep-rgb),.79) 44%,rgba(var(--company-deep-rgb),.20))}
+body[data-company-theme] .hero small{color:var(--company-highlight)}
+body[data-company-theme] .hero h1,body[data-company-theme] .hero p{color:#fff}
+body[data-company-theme] .card,body[data-company-theme] .panel,body[data-company-theme] .portal-content{border-color:var(--company-line)}
+body[data-company-theme] .card b{color:var(--od)!important}
+body[data-company-theme] .card{border-block-start:3px solid var(--company-line)}
+body[data-company-theme] .card:hover{border-block-start-color:var(--accent)}
+body[data-company-theme] .primary,body[data-company-theme] .portal-content .primary,body[data-company-theme] .logout-screen button,body[data-company-theme] .hierarchy-open-button{background:var(--od);color:#fff}
+body[data-company-theme] .primary:hover,body[data-company-theme] .hierarchy-open-button:hover{filter:brightness(.93)}
+body[data-company-theme] button:focus-visible,body[data-company-theme] input:focus-visible,body[data-company-theme] select:focus-visible,body[data-company-theme] textarea:focus-visible{outline:2px solid var(--company-focus);outline-offset:2px}
+body[data-company-theme] input,body[data-company-theme] select,body[data-company-theme] textarea{accent-color:var(--od);border-color:var(--company-line)}
+body[data-company-theme] th{background:var(--company-soft);color:var(--company-ink)}
+body[data-company-theme] tbody tr:hover{background:var(--company-soft)}
+body[data-company-theme] .shell-toolbar button,body[data-company-theme] .portal-tabs button{background:var(--company-soft);color:var(--company-ink)}
+body[data-company-theme] .shell-toolbar .primary,body[data-company-theme] .portal-tabs button.selected{background:var(--od);color:#fff}
+body[data-company-theme] .report-summary,body[data-company-theme] .kanban-column{background:var(--company-soft)}
+body[data-company-theme] .kanban-card{border-color:var(--company-line);border-block-start:3px solid var(--accent)}
+body[data-company-theme] .bar{background:var(--company-soft)}
+body[data-company-theme] .bar i{background:var(--od)}
+body[data-company-theme] .tree-node{border-color:var(--company-line);border-inline-start:4px solid var(--od)}
+body[data-company-theme] .hierarchy-launcher{background:linear-gradient(135deg,var(--company-soft),var(--company-surface));border-color:var(--company-line)}
+body[data-company-theme] .hierarchy-launcher strong{color:var(--company-ink)}
+body[data-company-theme] .hierarchy-modal{border-color:var(--company-line);background:var(--company-surface)}
+body[data-company-theme] .hierarchy-modal-header{background:linear-gradient(115deg,var(--deep),var(--od));color:#fff}
+body[data-company-theme] .hierarchy-modal-header h2{color:#fff!important}
+body[data-company-theme] .hierarchy-modal-header small{color:var(--company-highlight)}
+body[data-company-theme] .hierarchy-modal .hierarchy-controls button{background:var(--company-soft);color:var(--company-ink)}
+body[data-company-theme] .hierarchy-edit-tools{background:var(--company-soft);border-color:var(--company-line)}
+body[data-company-theme] .hierarchy-edit-tools button,body[data-company-theme] .hierarchy-edit-tools .toolbar button{border-color:var(--company-line);color:var(--company-ink)}
+body[data-company-theme] .hierarchy-edit-toggle[aria-pressed=true],body[data-company-theme] .hierarchy-edit-tools .toolbar button.primary{background:var(--od);color:#fff}
+body[data-company-theme] .hierarchy-viewport,body[data-company-theme] .hierarchy-modal .hierarchy-viewport{background-color:var(--company-surface);background-image:radial-gradient(var(--company-line) .9px,transparent .9px);border-color:var(--company-line)}
+body[data-company-theme] .hierarchy-card,body[data-company-theme] .hierarchy-modal .hierarchy-card{border-color:var(--company-line);border-top-color:var(--accent);color:var(--company-ink);background:#fff}
+body[data-company-theme] .hierarchy-card[data-level="قطاع"],body[data-company-theme] .hierarchy-modal .hierarchy-card[data-level="قطاع"]{background:linear-gradient(140deg,var(--deep),var(--od));border-color:var(--od);border-top:5px solid var(--company-highlight);color:#fff}
+body[data-company-theme] .hierarchy-card[data-level="قطاع"] small,body[data-company-theme] .hierarchy-card[data-level="قطاع"] .hierarchy-code{color:#ffffffc9}
+body[data-company-theme] .hierarchy-card[data-level="قطاع"] .hierarchy-level{background:#ffffff21;color:#fff}
+body[data-company-theme] .hierarchy-card[data-level="إدارة"],body[data-company-theme] .hierarchy-modal .hierarchy-card[data-level="إدارة"]{background:#fff;color:var(--company-ink);border-top:5px solid var(--accent)}
+body[data-company-theme] .hierarchy-card[data-level="إدارة"] .hierarchy-level{background:var(--company-soft);color:var(--od)}
+body[data-company-theme] .hierarchy-card[data-level="وحدة"]{background:var(--company-soft);border-top-color:var(--company-focus)}
+body[data-company-theme] .hierarchy-card[data-level="قسم"]{background:#fff;border-top:3px solid var(--company-line)}
+body[data-company-theme] .hierarchy-level{background:var(--company-soft);color:var(--od)}
+body[data-company-theme] .hierarchy-expand{background:var(--od)!important;color:#fff!important;border-color:var(--company-surface)}
+body[data-company-theme] .hierarchy-card.selected{outline-color:var(--company-focus)}
+body[data-company-theme] .hierarchy-card.self{background:var(--company-soft);border-color:var(--od)}
+body[data-company-theme] .hierarchy-forest>.hierarchy-item>.hierarchy-card:not([data-level]){background:var(--deep);color:#fff}
+body[data-company-theme] .hierarchy-forest>.hierarchy-item>.hierarchy-card:not([data-level]) small{color:#ffffffca}
+body[data-company-theme] .hierarchy-children:before,body[data-company-theme] .hierarchy-children>.hierarchy-item:before,body[data-company-theme] .hierarchy-children>.hierarchy-item:after{border-color:var(--company-line)}
+body[data-company-theme] .hierarchy-card.drop-target{background:#def9ed!important;color:#14583d!important;outline-color:#19a874}
+@media print{body[data-company-theme]{background:#fff}}

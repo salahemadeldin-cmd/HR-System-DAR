@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#181818">
+<title>دخول المنصة | التطوير المؤسسي — مجموعة دار</title>
+<link rel="stylesheet" href="/site/site.css">
+<style>
+body{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr);background:var(--paper)}
+.login-art{position:relative;overflow:hidden;background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:48px}
+.login-art img{width:170px}
+.login-art h1{font-size:clamp(28px,3.4vw,44px);line-height:1.35;margin:0 0 14px;font-weight:700}
+.login-art p{color:#ffffffb8;max-width:460px;line-height:1.9;margin:0}
+.login-art small{color:#ffffff80;letter-spacing:.2em;font-size:11px}
+.login-art::after{content:'';position:absolute;inset:auto -20% -40% auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(150,155,162,.28),transparent 65%);pointer-events:none}
+.login-panel{display:grid;place-items:center;padding:40px 24px}
+.login-card{width:min(400px,100%)}
+.login-card h2{font-size:26px;margin:0 0 6px}
+.login-card .sub{color:var(--muted);margin:0 0 28px;line-height:1.8}
+.field{display:grid;gap:8px;margin-bottom:16px;font-size:14px;color:var(--muted)}
+.field input{font:inherit;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);direction:ltr;text-align:right}
+.field input:focus{outline:2px solid var(--ink);outline-offset:1px;border-color:transparent}
+.err{color:#b42318;min-height:24px;margin:4px 0 12px;font-size:14px}
+.submit{width:100%;font:inherit;font-weight:600;padding:15px;border:0;border-radius:12px;background:var(--ink);color:#fff;cursor:pointer}
+.submit[disabled]{opacity:.6;cursor:wait}
+.hint{color:var(--muted);font-size:13px;line-height:1.8;margin-top:22px}
+.back{display:inline-block;margin-top:18px;color:var(--ink)}
+@media(max-width:860px){body{grid-template-columns:1fr}.login-art{min-height:260px;padding:28px}.login-art h1{font-size:26px}}
+</style>
+</head>
+<body>
+<section class="login-art" aria-hidden="false">
+  <img src="/site/assets/dar-group-white.png" alt="مجموعة دار">
+  <div>
+    <small>PEOPLE · STRUCTURE · GROWTH</small>
+    <h1>منصة التطوير المؤسسي<br>لمجموعة دار</h1>
+    <p>الهياكل والوظائف والجدارات والأداء والتعلم لكل شركات المجموعة في مكان واحد، بصلاحيات تحددها إدارة الموارد البشرية والتطوير المؤسسي.</p>
+  </div>
+  <small>© 2026 DAR GROUP · ORGANIZATIONAL DEVELOPMENT</small>
+</section>
+<main class="login-panel">
+  <form class="login-card" id="login" novalidate>
+    <h2>تسجيل الدخول</h2>
+    <p class="sub">ادخل بالبريد وكلمة المرور التي سلّمتها لك إدارة التطوير المؤسسي.</p>
+    <label class="field">البريد الإلكتروني<input name="email" type="email" autocomplete="username" required></label>
+    <label class="field">كلمة المرور<input name="password" type="password" autocomplete="current-password" required></label>
+    <p class="err" role="alert" id="err"></p>
+    <button class="submit" type="submit">دخول</button>
+    <p class="hint">نسيت كلمة المرور؟ تواصل مع مسؤول المنصة في إدارة التطوير المؤسسي لإعادة تعيينها.</p>
+    <a class="back" href="/">← العودة للموقع</a>
+  </form>
+  <form class="login-card" id="change" hidden novalidate>
+    <h2>تعيين كلمة مرور جديدة</h2>
+    <p class="sub">لحماية حسابك، اختر كلمة مرور خاصة بك قبل المتابعة: 10 أحرف على الأقل بها حروف وأرقام.</p>
+    <label class="field">كلمة المرور الحالية<input name="current" type="password" autocomplete="current-password" required></label>
+    <label class="field">كلمة المرور الجديدة<input name="next" type="password" autocomplete="new-password" required minlength="10"></label>
+    <label class="field">تأكيد كلمة المرور<input name="confirm" type="password" autocomplete="new-password" required></label>
+    <p class="err" role="alert" id="err2"></p>
+    <button class="submit" type="submit">حفظ والمتابعة</button>
+  </form>
+</main>
+<script>
+(function(){
+  var change=location.pathname==='/change-password';
+  var L=document.getElementById('login'),C=document.getElementById('change');
+  if(change){L.hidden=true;C.hidden=false;document.title='تعيين كلمة المرور | منصة التطوير المؤسسي';}
+  function post(url,body){return fetch(url,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||'تعذر الاتصال');return j})})}
+  L.addEventListener('submit',function(e){e.preventDefault();var err=document.getElementById('err'),b=L.querySelector('button');err.textContent='';if(!L.email.value||!L.password.value){err.textContent='أدخل البريد وكلمة المرور';return}b.disabled=true;
+    post('/api/auth/login',{email:L.email.value,password:L.password.value}).then(function(j){var next=new URLSearchParams(location.search).get('next');location.href=j.user.must_change?'/change-password':(next&&next.charAt(0)==='/'&&next.charAt(1)!=='/'?next:'/')}).catch(function(x){err.textContent=x.message;b.disabled=false})});
+  C.addEventListener('submit',function(e){e.preventDefault();var err=document.getElementById('err2'),b=C.querySelector('button');err.textContent='';if(C.next.value!==C.confirm.value){err.textContent='كلمتا المرور غير متطابقتين';return}b.disabled=true;
+    post('/api/auth/password',{current:C.current.value,next:C.next.value}).then(function(){location.href='/'}).catch(function(x){err.textContent=x.message;b.disabled=false})});
+})();
+</script>
+</body>
+</html>
